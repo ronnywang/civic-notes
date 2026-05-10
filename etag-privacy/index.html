@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eTag 的隱私缺口｜公民筆記</title>
+<meta name="description" content="eTag 有一個設計上的缺口：任何人只要有一台讀取器，就能讀到你的 eTag，而你完全不知情。目前沒有已知的大規模濫用，但這個問題值得開始討論。">
+<link rel="stylesheet" href="../style.css">
+<style>
+  /* eTag 主題色：藍灰（隱私／監控） */
+  :root {
+    --color-primary: #3d5a80;
+    --color-primary-dark: #2c4a6e;
+    --color-heading: #1d3557;
+    --color-hero-from: #e8edf5;
+    --color-hero-to: #dde8f0;
+    --color-hero-title: #1d3557;
+    --color-card-bg: #f4f7fb;
+    --color-card-border: #c8d8ea;
+    --color-prompt-bg: #f2f5f9;
+    --color-highlight-bg: #fdf6ec;
+    --color-highlight-border: #e9a820;
+    --color-highlight-text: #5a4a20;
+  }
+</style>
+</head>
+<body>
+
+<div class="site-nav">
+  <a href="../">← 公民筆記首頁</a>
+</div>
+
+<!-- ════ Hero ════ -->
+<div class="hero">
+  <div class="topic-label">隱私 ／ 監控</div>
+  <h1>你的 eTag 可能正在被陌生人讀取</h1>
+  <p class="subtitle">這不是陰謀論，是設計上的現實。<br>這篇文章想提出一個問題，不是給出答案。</p>
+</div>
+
+<!-- ════ 開場情境 ════ -->
+<section>
+  <span class="section-label">起點</span>
+  <h2>一個讓我開始在意這件事的場景</h2>
+
+  <p>想像有人想持續追蹤某個特定的人——也許是一個政治人物、一個企業高管，或者是離開了施暴者的家暴受害者。</p>
+
+  <p>追蹤手機需要入侵設備或取得電信資料；安裝 GPS 追蹤器需要接觸到車輛。但如果對方知道目標的 eTag 號碼，只需要在幾個關鍵路口架設讀取器，就能自動記錄目標幾點出門、幾點經過哪裡、幾點回家。</p>
+
+  <p>目標不知情，也無法防範——因為 eTag 是固定在車上的硬體，拆掉就無法走高速公路。</p>
+
+  <p>這個場景讓我開始想：eTag 系統的設計，有沒有考慮過這類問題？</p>
+</section>
+
+<hr class="divider">
+
+<!-- ════ 為什麼這是可能的 ════ -->
+<section>
+  <span class="section-label">背景</span>
+  <h2>為什麼這在技術上是可能的</h2>
+
+  <p>eTag 是一個無線標籤。它的運作方式很簡單：讀取器發出詢問訊號，eTag 就自動回應自己的 ID——不管讀取器是誰架的，eTag 都會回應。<strong>你不知道自己被讀取，也沒有辦法拒絕。</strong></p>
+
+  <p>更關鍵的是，系統設計上<strong>沒有任何隱私保護機制</strong>：每個 eTag 的 ID 是固定的，每次被讀取都回傳同一組號碼。有技術解方（讓 ID 定期隨機換號，類似現代手機連 Wi-Fi 時的做法），但目前的系統沒有實作。</p>
+
+  <p>如果用比喻來說：這有點像你的身分證字號被印在車頂，所有路過的人都能看到，只是因為你看不見這個過程，所以感覺不到。</p>
+
+  <div class="highlight-box">
+    <strong>架設讀取器的門檻有多低？</strong><br>
+    商用讀取器在網路上約 5,000–30,000 元可以買到。搭配免費的開源車牌辨識軟體，可以自動把 eTag ID 和車牌號碼配對起來。這不需要特殊技術背景，也不需要大量資金。
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ════ 威脅情境 ════ -->
+<section>
+  <span class="section-label">推論</span>
+  <h2>這讓哪些事情變得可能</h2>
+
+  <p>目前<strong>沒有已知的大規模濫用案例</strong>。以下是我覺得比較值得擔心的幾個場景，由我個人判斷的現實可能性排序。</p>
+
+  <div class="cards">
+    <div class="card">
+      <span class="card-num">1</span>
+      <h3>商業數據蒐集</h3>
+      <p>商場、停車場、廣告業者蒐集「常客 ID」做行銷分析或轉賣。國外零售業者追蹤消費者有類似爭議前例。</p>
+    </div>
+    <div class="card">
+      <span class="card-num">2</span>
+      <h3>跟蹤騷擾</h3>
+      <p>目標明確、預算有限、不在意違法的場景。例如徵信業者、跟蹤騷擾者、商業間諜。</p>
+    </div>
+    <div class="card">
+      <span class="card-num">3</span>
+      <h3>家暴受害者追蹤</h3>
+      <p>離開施暴者後最怕被追蹤行蹤。eTag 是難以察覺的被動洩漏管道，受害者幾乎無從防範。</p>
+    </div>
+    <div class="card">
+      <span class="card-num">4</span>
+      <h3>針對特定人士的定點追蹤</h3>
+      <p>事先取得目標 eTag 號碼（只需一次性人工情報），就能在幾個關鍵地點長期低成本監控其行蹤。包括針對公職人員或企業高管的情報蒐集。</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ════ 為什麼現在沒人在討論 ════ -->
+<section>
+  <span class="section-label">現況</span>
+  <h2>這個問題目前幾乎沒有人討論</h2>
+
+  <p>這個議題並非全無討論。2014 年國道電子收費上路初期，台灣人權促進會等九個民間團體曾聯合召開記者會，發表聲明〈eTag 全民公敵——還我不受監控的行動自由〉，直接點名遠通電收建構了「全台灣車輛國道即時監測記錄」系統。當時的具體訴求包括：恢復部分人工收費、要求遠通不得將個資提供第三方或作目的外使用、監察院調查招商標案。</p>
+
+  <p>但這波討論之後，議題沒有繼續發展。此後超過十年，公開討論幾乎消失，主管機關也沒有相關的政策回應。這可能有幾個原因：</p>
+
+  <ul style="margin: 0.75rem 0 0.75rem 1.5rem; color: #444; line-height: 2;">
+    <li>沒有已知的重大事件觸發後續關注</li>
+    <li>eTag 帶來的便利感讓人不容易持續聯想到隱私風險</li>
+    <li>問題是結構性的、慢性的，不像資料外洩有明確的受害時間點</li>
+  </ul>
+
+  <p>設計缺陷是真實存在的，它不會因為目前沒有濫用就消失。2014 年的聲明在某種程度上也說明：這個問題不是沒有人看見過，只是還沒有找到推動改變的著力點。</p>
+
+  <p style="font-size: 0.9rem; color: #666;">參考：<a href="https://www.tahr.org.tw/news/1339" target="_blank" rel="noopener">台灣人權促進會，2014-01-17〈eTag全民公敵—還我不受監控的行動自由〉</a></p>
+
+  <div class="opinion-box">
+    <div class="label">這篇文章的定位</div>
+    我沒有足夠的資料知道這個問題有多嚴重，也不確定哪些解法是真的可行的。這篇文章的目的是把這個設計缺口說清楚，讓有興趣的人可以繼續思考和討論。
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ════ 可能的方向 ════ -->
+<section>
+  <span class="section-label">我想到的兩個方向</span>
+  <h2>如果要對這個問題做些什麼</h2>
+
+  <p>我目前想到兩個方向，目的不同、切入點也不同：</p>
+
+  <div class="cards">
+    <div class="card">
+      <span class="card-num">1</span>
+      <h3>修法：強制設備登錄並公開</h3>
+      <p><strong>目的：治本。</strong>用法律直接處理隱私問題的根源。</p>
+      <p style="margin-top:0.75rem;">做法是要求所有 eTag 讀取設備依法登錄：登記位置、用途、資料收集範圍，並將這些資訊公開上網。一旦建立登錄制度，「未登錄」本身就是明確違法事實——公民發現可疑設備就有法律依據要求主管機關介入，不再只是「技術上可能有風險」的模糊狀態。</p>
+      <p style="margin-top:0.75rem; color: #666; font-size: 0.9rem;">還沒想清楚的：主管機關應該是 NCC、交通部，還是個資保護委員會？有沒有其他國家做過類似的事？</p>
+    </div>
+    <div class="card">
+      <span class="card-num">2</span>
+      <h3>公民科技：探查是否有未知設備</h3>
+      <p><strong>目的：確認現況。</strong>在談解法之前，先弄清楚這個問題目前到底有多嚴重。</p>
+      <p style="margin-top:0.75rem;">目前沒有已知的濫用案例，但這可能只是因為沒有人系統性地調查過。可行的方向是用 SDR 設備（軟體定義無線電）在路上記錄 RFID 訊號特徵，找出與官方系統無關的未知讀取器位置。如果調查結果是「沒有發現異常」，那這個問題可能沒那麼急迫；如果發現有，就有了推動修法的具體依據。</p>
+      <p style="margin-top:0.75rem; color: #666; font-size: 0.9rem;">還沒想清楚的：這需要有 RF 背景的合作者。被動接收訊號大致合法，但解碼通訊內容有法律灰色地帶，需要先確認邊界。</p>
+
+      <details style="margin-top: 1rem;">
+        <summary style="cursor: pointer; color: var(--color-primary); font-size: 0.95rem; font-weight: 600; user-select: none;">技術細節：具體怎麼做？▸</summary>
+        <div style="margin-top: 1rem; padding: 1rem; background: #f4f7fb; border-radius: 6px; border-left: 3px solid var(--color-card-border); font-size: 0.95rem; line-height: 1.8; color: #333;">
+
+          <p><strong>基本原理</strong></p>
+          <p>eTag 讀取器在運作時會持續發出特定頻率（約 920–925 MHz）的電磁波來喚醒附近的 eTag，並送出查詢指令，要求 eTag 回傳自己的 ID。這個過程可以用 SDR（軟體定義無線電）偵測——不需要特殊硬體，一台 RTL-SDR 或 HackRF One 搭配筆電就能接收。</p>
+
+          <p style="margin-top: 1rem;"><strong>去雜訊的關鍵：解碼協議，不只看頻率</strong></p>
+          <p>920–925 MHz 是開放頻段，有許多不同用途的設備都在這個範圍運作，光是「有訊號」不足以確認是 eTag 讀取器。更可靠的做法是試著<strong>解碼訊號內容</strong>——EPC Gen2 協議有特定的指令格式，如果能確認收到的是一個真正的查詢指令（Query command），幾乎可以確定那裡有讀取器，不需要其他交叉驗證。</p>
+
+          <p style="margin-top: 1rem;"><strong>兩車交叉驗證（補充確認）</strong></p>
+          <p>如果無法解碼協議，或想要更高的確信度，可以用兩台車分別、獨立地經過同一路段——關鍵是要<strong>不同天或間隔數小時</strong>，不是前後緊跟著跑。邏輯是：固定讀取器會一直在同一個 GPS 座標出現訊號；如果兩車在不同時間都在同一點偵測到，可信度大幅提高。如果只有一台車偵測到，那個訊號可能是臨時設備或其他用途的干擾。</p>
+
+          <p style="margin-top: 1rem;"><strong>需要的東西</strong></p>
+          <ul style="margin: 0.5rem 0 0 1.25rem;">
+            <li>SDR 設備（如 RTL-SDR 約 1,000 元，或 HackRF One 約 15,000 元）</li>
+            <li>能解碼 EPC Gen2 的軟體（有開源工具，但需要技術能力設定）</li>
+            <li>GPS 記錄裝置或手機，搭配地圖軟體標記偵測點</li>
+            <li>有 RF 或無線電背景的合作者</li>
+          </ul>
+
+          <p style="margin-top: 1rem; color: #666;"><strong>法律邊界</strong>：被動接收空中訊號在台灣大致合法；解碼通訊內容目前有灰色地帶，建議在正式行動前先諮詢法律意見。</p>
+        </div>
+      </details>
+    </div>
+  </div>
+
+  <p style="margin-top: 1.5rem;">這兩個方向可以並行：公民科技探查提供數據，修法方向提供制度框架。不過這些想法目前還很粗糙，也沒有把握是否真的可行。</p>
+</section>
+
+<hr class="divider">
+
+<!-- ════ 還沒答案的問題 ════ -->
+<section>
+  <span class="section-label">還沒有答案</span>
+  <h2>我不知道的事</h2>
+
+  <p>這個議題有幾個核心問題我目前沒有答案，如果你有想法，很歡迎討論：</p>
+
+  <ul style="margin: 0.75rem 0 0.75rem 1.5rem; color: #444; line-height: 2.2;">
+    <li>台灣目前有沒有任何已知的非法 eTag 讀取案例？</li>
+    <li>《跟蹤騷擾防制法》的現行框架，是否已涵蓋 RFID 追蹤行為？</li>
+    <li>感應器登錄制度在實務上可行嗎？有沒有其他國家做過類似的事？</li>
+    <li>遠通電收對這個問題的內部評估是什麼？換代時有沒有可能推動 ID 隨機化？</li>
+    <li>公民科學偵測 RFID 訊號在法律上的邊界在哪裡？</li>
+    <li>EPC Gen2 協議本身沒有密碼學認證，理論上可以偽造他人的 eTag ID 廣播出去——這讓位置紀錄有被竄改或栽贓的可能性，但台灣目前有沒有任何已知案例或研究討論過這個問題？</li>
+  </ul>
+</section>
+
+<hr class="divider">
+
+<!-- ════ AI Prompt ════ -->
+<section class="prompt-section">
+  <span class="section-label">一起討論</span>
+  <h2>把這個議題帶去問你的 AI</h2>
+  <p class="prompt-intro">把下面的提示文字複製到 ChatGPT、Claude、Gemini 等任何 AI，就能基於這份背景繼續討論、提出不同觀點，或挑戰這裡的推論。</p>
+
+  <div class="prompt-box" id="promptText"><button class="copy-btn" id="copyBtn" onclick="copyPrompt()">複製</button>我想和你討論台灣 eTag 的隱私風險議題。以下是一篇觀察筆記的背景：
+
+【核心問題】
+eTag 是被動無線標籤，任何架設讀取器的人都能讀到它的 ID，使用者不知情、也無法拒絕。系統目前沒有 ID 隨機化等隱私保護機制。商用讀取器加上車牌辨識軟體，單點建置成本可能不到 3 萬台幣。
+
+【覺得值得擔心的場景（個人推論，非已知事件）】
+1. 商業數據蒐集（商場、停車場、廣告業者）
+2. 徵信、跟蹤騷擾、商業間諜
+3. 家暴受害者追蹤
+4. 針對特定人士的定點追蹤（事先取得目標 eTag 號碼後，在關鍵地點長期監控行蹤；eTag 無法關機或留在辦公室）
+
+【目前沒有已知大規模濫用案例】
+這是結構性設計風險，而非迫切威脅。台灣社會也幾乎沒有公開討論。
+
+【初步想到的方向（不確定是否可行）】
+1. 技術：eTag 換代時推動 ID 定期隨機化
+2. 法規：建立感應器登錄制度，讓未登錄感應器成為明確違法事實
+
+【還沒有答案的問題】
+- 《跟蹤騷擾防制法》是否涵蓋 RFID 追蹤？
+- 感應器登錄制度在其他國家有沒有先例？
+- 公民科學偵測 RFID 訊號的法律邊界為何？
+
+請針對上述內容提出你的看法，可以挑戰現有推論，也可以補充沒想到的角度。</div>
+</section>
+
+<footer>
+  本頁內容基於個人觀察整理，標示「推論」的部份為個人判斷，不代表已有研究支撐。<br>
+  原始碼：<a href="https://github.com/ronnywang/civic-notes">GitHub</a>
+</footer>
+
+<script>
+function copyPrompt() {
+  const box = document.getElementById('promptText');
+  const btn = document.getElementById('copyBtn');
+  const text = box.innerText.replace(/^複製\n?/, '').trim();
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '已複製！';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '複製'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>
