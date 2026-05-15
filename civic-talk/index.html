@@ -22,50 +22,135 @@
     --color-highlight-text: #5a4000;
   }
 
-  .flow-diagram {
+  /* ── Overview flow ── */
+  .flow-overview {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0;
-    margin: 2rem 0;
+    margin: 1.75rem 0 2.5rem;
     flex-wrap: wrap;
   }
-  .flow-step {
+  .flow-pill {
     background: var(--color-card-bg);
     border: 2px solid var(--color-card-border);
-    border-radius: 12px;
-    padding: 1rem 1.5rem;
-    text-align: center;
-    min-width: 140px;
-  }
-  .flow-step .step-num {
-    font-size: 0.75rem;
+    border-radius: 30px;
+    padding: 0.5rem 1.4rem;
+    font-size: 0.95rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--color-primary);
-    margin-bottom: 0.25rem;
-  }
-  .flow-step .step-name {
-    font-size: 1.2rem;
-    font-weight: 800;
     color: var(--color-heading);
   }
-  .flow-step .step-desc {
-    font-size: 0.82rem;
-    color: #666;
-    margin-top: 0.3rem;
-    line-height: 1.4;
-  }
-  .flow-arrow {
-    font-size: 1.5rem;
-    color: #bbb;
-    padding: 0 0.5rem;
-  }
-  .step-highlight {
+  .flow-pill.active {
+    background: var(--color-primary);
     border-color: var(--color-primary);
-    background: #efedfc;
+    color: #fff;
+  }
+  .flow-arrow-sm {
+    font-size: 1.1rem;
+    color: #bbb;
+    padding: 0 0.4rem;
   }
 
+  /* ── Detailed steps ── */
+  .steps {
+    margin-top: 0.5rem;
+    position: relative;
+  }
+  .step {
+    display: flex;
+    gap: 1.25rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+  }
+  .step-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 44px;
+  }
+  .step-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .step-line {
+    width: 2px;
+    flex: 1;
+    background: #d1c4e9;
+    min-height: 1.5rem;
+  }
+  .step-body {
+    padding-bottom: 2rem;
+    flex: 1;
+    min-width: 0;
+  }
+  .step-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--color-primary);
+    border: 1.5px solid var(--color-card-border);
+    border-radius: 20px;
+    padding: 0.15em 0.7em;
+    margin-bottom: 0.4rem;
+  }
+  .step-body h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-heading);
+    margin: 0 0 0.5rem;
+  }
+  .step-body p {
+    font-size: 0.93rem;
+    color: #444;
+    margin-bottom: 0.5rem;
+  }
+  .step-note {
+    font-size: 0.85rem;
+    color: #777;
+    background: var(--color-card-bg);
+    border-radius: 6px;
+    padding: 0.5rem 0.85rem;
+    margin-top: 0.4rem;
+    border: 1px solid var(--color-card-border);
+  }
+
+  /* Loop indicator */
+  .loop-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: #f0edfb;
+    border: 1.5px dashed #b39ddb;
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin: 0.5rem 0 1rem;
+  }
+  .loop-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+  .loop-box p {
+    font-size: 0.88rem;
+    color: #5e35b1;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* ── Principles ── */
   .principle-list {
     list-style: none;
     margin-top: 1rem;
@@ -85,70 +170,30 @@
     margin-bottom: 0.15rem;
   }
 
-  .status-list {
-    list-style: none;
-    margin-top: 1rem;
-  }
-  .status-list li {
-    padding: 0.5rem 0;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    font-size: 0.95rem;
-    color: #444;
-    border-bottom: 1px solid #eee;
-  }
-  .status-list li:last-child { border-bottom: none; }
-  .status-icon {
-    flex-shrink: 0;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    display: flex;
+  /* ── Status badge ── */
+  .status-badge {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    font-size: 0.75rem;
+    gap: 0.5rem;
+    background: #fff9c4;
+    border: 1.5px solid #f9a825;
+    border-radius: 20px;
+    padding: 0.4em 1.1em;
+    font-size: 0.88rem;
     font-weight: 700;
-    margin-top: 0.1rem;
-  }
-  .done { background: #c8e6c9; color: #2e7d32; }
-  .next { background: #fff9c4; color: #827717; }
-  .todo { background: #f5f5f5; color: #999; }
-
-  .cta-box {
-    background: linear-gradient(135deg, #ede7f6 0%, #e8eaf6 100%);
-    border-radius: 16px;
-    padding: 2rem;
-    text-align: center;
-    margin-top: 1.5rem;
-  }
-  .cta-box h3 {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--color-heading);
-    margin-bottom: 0.5rem;
-  }
-  .cta-box p {
-    font-size: 0.95rem;
-    color: #555;
+    color: #5a4000;
     margin-bottom: 1rem;
   }
-  .btn-primary {
+  .status-badge::before {
+    content: "";
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #f9a825;
     display: inline-block;
-    background: var(--color-primary);
-    color: #fff;
-    text-decoration: none;
-    padding: 0.65em 1.5em;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 0.95rem;
-    transition: background 0.2s;
   }
-  .btn-primary:hover { background: var(--color-primary-dark); }
 
   @media (max-width: 600px) {
-    .flow-diagram { flex-direction: column; }
-    .flow-arrow { transform: rotate(90deg); }
+    .flow-overview { flex-wrap: wrap; row-gap: 0.5rem; }
   }
 </style>
 </head>
@@ -164,6 +209,7 @@
   <p class="subtitle">一個實驗中的平台：用 AI 整理多方立場，讓一般人也能快速掌握議題全貌，而不只是選邊站。</p>
 </div>
 
+<!-- 問題 -->
 <section>
   <span class="section-label">問題</span>
   <h2>為什麼大多數公共討論沒有用？</h2>
@@ -181,42 +227,107 @@
 
 <hr class="divider">
 
+<!-- 流程 -->
 <section>
   <span class="section-label">設計</span>
-  <h2>三段式流程</h2>
+  <h2>運作流程</h2>
 
-  <div class="flow-diagram">
-    <div class="flow-step step-highlight">
-      <div class="step-num">STEP 1</div>
-      <div class="step-name">INFORM</div>
-      <div class="step-desc">彙整多方立場<br>建立素材庫</div>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step">
-      <div class="step-num">STEP 2</div>
-      <div class="step-name">OPINION</div>
-      <div class="step-desc">引導你形成<br>有根據的意見</div>
-    </div>
-    <div class="flow-arrow">→</div>
-    <div class="flow-step">
-      <div class="step-num">STEP 3</div>
-      <div class="step-name">SYNTHESIS</div>
-      <div class="step-desc">呈現立場分布<br>而非結論</div>
-    </div>
+  <p>整個流程分三個大階段，共五個步驟。第三到五步會不斷循環，讓議題頁面隨著更多人參與而持續更新。</p>
+
+  <div class="flow-overview">
+    <div class="flow-pill active">INFORM<br><span style="font-size:0.72rem;font-weight:400;">建立資訊基礎</span></div>
+    <div class="flow-arrow-sm">→</div>
+    <div class="flow-pill">OPINION<br><span style="font-size:0.72rem;font-weight:400;">引導個人參與</span></div>
+    <div class="flow-arrow-sm">→</div>
+    <div class="flow-pill">SYNTHESIS<br><span style="font-size:0.72rem;font-weight:400;">匯聚與反饋</span></div>
   </div>
 
-  <h3>INFORM：先讓大家站在同一個資訊起跑點</h3>
-  <p>收集這個議題上不同立場的來源——政府文件、NGO 聲明、新聞報導、社群發言——用 AI 整理成結構化的素材庫，標注每份素材的來源與立場。不過濾，讓讀者自己判斷。</p>
+  <div class="steps">
 
-  <h3>OPINION：不是問你支不支持，而是問你在乎什麼</h3>
-  <p>AI 透過情境式問題引導（「如果你發現自己的車輛行蹤被陌生人追蹤，你會……」），讓你在看完素材後形成有根據的意見，而不只是選邊站。</p>
+    <div class="step">
+      <div class="step-left">
+        <div class="step-circle">1</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-tag">INFORM</div>
+        <h3>意見收集：廣撒網，不過濾</h3>
+        <p>由人工收集這個議題上來自不同立場的來源——政府文件、NGO 聲明、新聞報導、社群發文、學術研究。志願者直接複製貼上頁面原文，同一份來源由三人各貼一次、比對一致後採用，確保完整性。</p>
+        <div class="step-note">不做可信度過濾。立場鮮明、甚至可信度有爭議的來源都納入，因為「真實存在的各種聲音」本身就是議題現況的一部分。</div>
+      </div>
+    </div>
 
-  <h3>SYNTHESIS：立場地圖，不是投票結果</h3>
-  <p>輸出的不是「幾比幾支持」，而是「哪些人在乎哪些面向」的分布地圖。原始意見全部公開，讓操縱行為可以被社群檢驗。</p>
+    <div class="step">
+      <div class="step-left">
+        <div class="step-circle">2</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-tag">INFORM</div>
+        <h3>意見彙整：找出共識、爭點與立場</h3>
+        <p>由 AI 讀取收集到的素材，整理出這個議題目前的：</p>
+        <p>
+          <strong style="color:var(--color-heading)">共識</strong>——大多數立場都同意的事實或前提<br>
+          <strong style="color:var(--color-heading)">爭點</strong>——各方有明顯分歧的核心問題<br>
+          <strong style="color:var(--color-heading)">立場地圖</strong>——誰在乎哪些面向、各自的論據是什麼
+        </p>
+        <div class="step-note">同一份素材庫由兩位志願者各自整理一次，再由另外幾位比對查驗忠實度，取最貼近原始來源的版本。</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left">
+        <div class="step-circle">3</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-tag">INFORM</div>
+        <h3>生成一頁式情境說明</h3>
+        <p>根據彙整結果，自動產出一份給一般讀者的一頁式網頁——用情境故事帶出議題背景、整理各方立場與關鍵爭點，讓沒有背景知識的人也能在幾分鐘內掌握全貌。</p>
+        <p>這份說明頁並非固定不變，它會隨著更多意見回饋（第五步）不斷更新修訂。</p>
+        <div class="step-note">產生頁面這件事本身也可以外包給志願者用自己的 AI token 完成，平台 server 端不需要直接呼叫 AI API。</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left">
+        <div class="step-circle">4</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-tag">OPINION</div>
+        <h3>帶走討論：用你自己的 AI 聊透這個議題</h3>
+        <p>讀完一頁式說明後，你可以下載一份 <strong style="color:var(--color-heading)">OPINION.md</strong>，把它貼進你慣用的 AI chatbot（Claude、ChatGPT、Gemini 都行）。</p>
+        <p>AI 會根據你的生活情境提問，引導你思考這個議題和你有什麼關係、你在乎哪個面向、你的直覺從哪來——不是要你選邊站，而是幫你說清楚自己的觀點。</p>
+        <p>聊到一個段落後，請 AI 幫你整理這段對話的摘要，把你的個人意見與觀察回傳到平台。</p>
+        <div class="step-note">跟自己的 AI 聊，不是在平台上公開發言。你回傳的是 AI 幫你整理過的摘要，不是原始對話記錄。</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-left">
+        <div class="step-circle">5</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <div class="step-tag">SYNTHESIS</div>
+        <h3>再彙整：把個人意見納入議題圖像</h3>
+        <p>平台收集到足夠的個人意見回饋後，再跑一次 AI 彙整：確認原有的共識和爭點是否仍然成立、是否有在原始素材中沒有出現的新觀點或新面向被參與者帶了進來。</p>
+        <p>如果有新發現，就更新一頁式說明頁，讓下一批讀者看到更完整的議題全貌。</p>
+
+        <div class="loop-box">
+          <div class="loop-icon">↺</div>
+          <p><strong>持續循環</strong>：第三步產出的一頁式說明，會因為第五步的新發現而更新，更新後又吸引更多人進來第四步參與討論。這個循環讓議題頁面保持活的，而不是一份靜態報告。</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </section>
 
 <hr class="divider">
 
+<!-- 關鍵選擇 -->
 <section>
   <span class="section-label">關鍵選擇</span>
   <h2>為什麼這樣設計？</h2>
@@ -224,11 +335,11 @@
   <ul class="principle-list">
     <li>
       <strong>素材收集靠人工，不靠爬蟲</strong>
-      網路內容結構複雜，動態載入、登入牆、反爬蟲機制讓自動抓取成功率很低。平台改由志願者手動複製貼上頁面原文，三個人各貼一次，比對一致才採用——確保完整性，也讓每份素材有人為把關。
+      網路內容結構複雜，動態載入、登入牆、反爬蟲機制讓自動抓取成功率很低。平台由志願者手動複製貼上頁面原文，三人各貼一次比對後採用——確保完整性，也讓每份素材有人為把關。
     </li>
     <li>
       <strong>平台本身不用 AI token</strong>
-      Server 端不呼叫任何 AI API。AI 運算的部分（例如生成素材摘要）由志願者用自己的 AI token 完成。很多人每週都有用不完的 token，這個平台讓閒置的算力變成公共資源。
+      Server 端不呼叫任何 AI API。素材彙整、情境說明頁的生成，全部由志願者用自己的 AI token 完成。很多人每週有用不完的 token，這個平台讓閒置的算力變成公共資源。
     </li>
     <li>
       <strong>中立 = 廣度，不是立場平衡</strong>
@@ -236,75 +347,23 @@
     </li>
     <li>
       <strong>輸出立場地圖，不輸出結論</strong>
-      平台的角色是呈現，不是裁決。每個人看完之後的結論可以不同，那本來就應該是各自的判斷。
+      平台的角色是呈現，不是裁決。每個人看完之後的判斷可以不同，那本來就應該是各自的事。
     </li>
   </ul>
 </section>
 
 <hr class="divider">
 
+<!-- 現況 -->
 <section>
   <span class="section-label">現況</span>
-  <h2>目前做到哪裡了？</h2>
+  <h2>開發中</h2>
 
-  <ul class="status-list">
-    <li>
-      <span class="status-icon done">✓</span>
-      <span>議題管理後台（建立議題、設定狀態）</span>
-    </li>
-    <li>
-      <span class="status-icon done">✓</span>
-      <span>使用者註冊登入（第一位註冊者自動為管理員）</span>
-    </li>
-    <li>
-      <span class="status-icon done">✓</span>
-      <span>素材 URL 提交（任何人都可以提交，防重複）</span>
-    </li>
-    <li>
-      <span class="status-icon done">✓</span>
-      <span>素材原文貼入（志願者手動貼入頁面全文）</span>
-    </li>
-    <li>
-      <span class="status-icon next">→</span>
-      <span>三份原文比對核實、INFORM 生成與查驗流程</span>
-    </li>
-    <li>
-      <span class="status-icon todo">○</span>
-      <span>OPINION 情境問卷</span>
-    </li>
-    <li>
-      <span class="status-icon todo">○</span>
-      <span>SYNTHESIS 立場地圖</span>
-    </li>
-  </ul>
+  <div class="status-badge">開發中</div>
 
-  <p style="margin-top:1.25rem; font-size:0.92rem; color:#666;">這是一個個人 side project，目前還在早期驗證階段。如果概念可行，會考慮捐給 <a href="https://vtaiwan.tw" style="color:var(--color-primary)">vTaiwan</a> 或 g0v 社群繼續推進。</p>
-</section>
+  <p>這是一個個人 side project，目前還在早期驗證階段。如果概念可行，會考慮捐給 <a href="https://vtaiwan.tw" style="color:var(--color-primary)">vTaiwan</a> 或 g0v 社群繼續推進。</p>
 
-<hr class="divider">
-
-<section>
-  <span class="section-label">參與</span>
-  <h2>你可以做什麼</h2>
-
-  <div class="cards">
-    <div class="card">
-      <div class="card-num">1</div>
-      <h3>提交素材 URL</h3>
-      <p>看到和議題相關的文章、聲明、報導，直接貼 URL 進來。不需要判斷可信度，有代表性就夠。</p>
-    </div>
-    <div class="card">
-      <div class="card-num">2</div>
-      <h3>貢獻閒置 token</h3>
-      <p>如果你有 Claude / ChatGPT 的 token 快要重置，可以用來幫忙貼入素材原文或生成 INFORM 摘要。</p>
-    </div>
-  </div>
-
-  <div class="cta-box">
-    <h3>有興趣看看現在長什麼樣子？</h3>
-    <p>GitHub 上有原始碼和設計文件，也歡迎直接開 Issue 討論。</p>
-    <a href="https://github.com/ronnywang/civic-talk" class="btn-primary">到 GitHub 看 →</a>
-  </div>
+  <p>有想法或建議，歡迎到 <a href="https://github.com/ronnywang/civic-talk" style="color:var(--color-primary)">GitHub</a> 開 issue 討論。</p>
 </section>
 
 <footer>
