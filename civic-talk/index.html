@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>civic-talk：用 AI 降低審議民主的成本</title>
+<meta name="description" content="一個實驗中的公民審議平台：讓一般人也能在 15 分鐘內真正參與公共議題討論，而不只是選邊站。">
+<link rel="stylesheet" href="../style.css">
+<style>
+  :root {
+    --color-primary: #5c6bc0;
+    --color-primary-dark: #3949ab;
+    --color-heading: #1a237e;
+    --color-hero-from: #ede7f6;
+    --color-hero-to: #e8eaf6;
+    --color-hero-title: #311b92;
+    --color-card-bg: #f8f7fd;
+    --color-card-border: #d1c4e9;
+    --color-prompt-bg: #f5f5f5;
+    --color-highlight-bg: #fff8e1;
+    --color-highlight-border: #ffb300;
+    --color-highlight-text: #5a4000;
+  }
+
+  .flow-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+  }
+  .flow-step {
+    background: var(--color-card-bg);
+    border: 2px solid var(--color-card-border);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    text-align: center;
+    min-width: 140px;
+  }
+  .flow-step .step-num {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    margin-bottom: 0.25rem;
+  }
+  .flow-step .step-name {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--color-heading);
+  }
+  .flow-step .step-desc {
+    font-size: 0.82rem;
+    color: #666;
+    margin-top: 0.3rem;
+    line-height: 1.4;
+  }
+  .flow-arrow {
+    font-size: 1.5rem;
+    color: #bbb;
+    padding: 0 0.5rem;
+  }
+  .step-highlight {
+    border-color: var(--color-primary);
+    background: #efedfc;
+  }
+
+  .principle-list {
+    list-style: none;
+    margin-top: 1rem;
+  }
+  .principle-list li {
+    padding: 0.9rem 1rem;
+    border-left: 3px solid var(--color-primary);
+    margin-bottom: 0.75rem;
+    background: var(--color-card-bg);
+    border-radius: 0 8px 8px 0;
+    font-size: 0.95rem;
+    color: #333;
+  }
+  .principle-list li strong {
+    color: var(--color-heading);
+    display: block;
+    margin-bottom: 0.15rem;
+  }
+
+  .status-list {
+    list-style: none;
+    margin-top: 1rem;
+  }
+  .status-list li {
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: #444;
+    border-bottom: 1px solid #eee;
+  }
+  .status-list li:last-child { border-bottom: none; }
+  .status-icon {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-top: 0.1rem;
+  }
+  .done { background: #c8e6c9; color: #2e7d32; }
+  .next { background: #fff9c4; color: #827717; }
+  .todo { background: #f5f5f5; color: #999; }
+
+  .cta-box {
+    background: linear-gradient(135deg, #ede7f6 0%, #e8eaf6 100%);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+  .cta-box h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-heading);
+    margin-bottom: 0.5rem;
+  }
+  .cta-box p {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 1rem;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: var(--color-primary);
+    color: #fff;
+    text-decoration: none;
+    padding: 0.65em 1.5em;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--color-primary-dark); }
+
+  @media (max-width: 600px) {
+    .flow-diagram { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="../">← 公民筆記</a>
+</nav>
+
+<div class="hero">
+  <span class="topic-label">專案構想</span>
+  <h1>讓公共討論真的有用</h1>
+  <p class="subtitle">一個實驗中的平台：用 AI 整理多方立場，讓一般人也能快速掌握議題全貌，而不只是選邊站。</p>
+</div>
+
+<section>
+  <span class="section-label">問題</span>
+  <h2>為什麼大多數公共討論沒有用？</h2>
+
+  <p>想參與一個公共議題的討論，你通常需要先花幾個小時自己找資料——而且找到的往往都是同溫層已經認同的東西。</p>
+
+  <p>另一個問題是，各方的意見散落在 Facebook、新聞留言、論壇各處，沒有一個地方可以讓你看到「這個議題上，到底有哪些不同的聲音」。</p>
+
+  <div class="highlight-box">
+    結果就是：有在追議題的人越說越確定，沒在追的人乾脆不參與。兩種人之間的鴻溝越來越大。
+  </div>
+
+  <p>civic-talk 想做的，是用 AI 降低「從零到能參與討論」的門檻。</p>
+</section>
+
+<hr class="divider">
+
+<section>
+  <span class="section-label">設計</span>
+  <h2>三段式流程</h2>
+
+  <div class="flow-diagram">
+    <div class="flow-step step-highlight">
+      <div class="step-num">STEP 1</div>
+      <div class="step-name">INFORM</div>
+      <div class="step-desc">彙整多方立場<br>建立素材庫</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="step-num">STEP 2</div>
+      <div class="step-name">OPINION</div>
+      <div class="step-desc">引導你形成<br>有根據的意見</div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="step-num">STEP 3</div>
+      <div class="step-name">SYNTHESIS</div>
+      <div class="step-desc">呈現立場分布<br>而非結論</div>
+    </div>
+  </div>
+
+  <h3>INFORM：先讓大家站在同一個資訊起跑點</h3>
+  <p>收集這個議題上不同立場的來源——政府文件、NGO 聲明、新聞報導、社群發言——用 AI 整理成結構化的素材庫，標注每份素材的來源與立場。不過濾，讓讀者自己判斷。</p>
+
+  <h3>OPINION：不是問你支不支持，而是問你在乎什麼</h3>
+  <p>AI 透過情境式問題引導（「如果你發現自己的車輛行蹤被陌生人追蹤，你會……」），讓你在看完素材後形成有根據的意見，而不只是選邊站。</p>
+
+  <h3>SYNTHESIS：立場地圖，不是投票結果</h3>
+  <p>輸出的不是「幾比幾支持」，而是「哪些人在乎哪些面向」的分布地圖。原始意見全部公開，讓操縱行為可以被社群檢驗。</p>
+</section>
+
+<hr class="divider">
+
+<section>
+  <span class="section-label">關鍵選擇</span>
+  <h2>為什麼這樣設計？</h2>
+
+  <ul class="principle-list">
+    <li>
+      <strong>素材收集靠人工，不靠爬蟲</strong>
+      網路內容結構複雜，動態載入、登入牆、反爬蟲機制讓自動抓取成功率很低。平台改由志願者手動複製貼上頁面原文，三個人各貼一次，比對一致才採用——確保完整性，也讓每份素材有人為把關。
+    </li>
+    <li>
+      <strong>平台本身不用 AI token</strong>
+      Server 端不呼叫任何 AI API。AI 運算的部分（例如生成素材摘要）由志願者用自己的 AI token 完成。很多人每週都有用不完的 token，這個平台讓閒置的算力變成公共資源。
+    </li>
+    <li>
+      <strong>中立 = 廣度，不是立場平衡</strong>
+      不同立場的素材都要納入，包含立場鮮明、可信度有爭議的來源。重點是讓讀者看到「這個議題上真實存在的各種聲音」，而不是平台替讀者決定哪些聲音值得聽。
+    </li>
+    <li>
+      <strong>輸出立場地圖，不輸出結論</strong>
+      平台的角色是呈現，不是裁決。每個人看完之後的結論可以不同，那本來就應該是各自的判斷。
+    </li>
+  </ul>
+</section>
+
+<hr class="divider">
+
+<section>
+  <span class="section-label">現況</span>
+  <h2>目前做到哪裡了？</h2>
+
+  <ul class="status-list">
+    <li>
+      <span class="status-icon done">✓</span>
+      <span>議題管理後台（建立議題、設定狀態）</span>
+    </li>
+    <li>
+      <span class="status-icon done">✓</span>
+      <span>使用者註冊登入（第一位註冊者自動為管理員）</span>
+    </li>
+    <li>
+      <span class="status-icon done">✓</span>
+      <span>素材 URL 提交（任何人都可以提交，防重複）</span>
+    </li>
+    <li>
+      <span class="status-icon done">✓</span>
+      <span>素材原文貼入（志願者手動貼入頁面全文）</span>
+    </li>
+    <li>
+      <span class="status-icon next">→</span>
+      <span>三份原文比對核實、INFORM 生成與查驗流程</span>
+    </li>
+    <li>
+      <span class="status-icon todo">○</span>
+      <span>OPINION 情境問卷</span>
+    </li>
+    <li>
+      <span class="status-icon todo">○</span>
+      <span>SYNTHESIS 立場地圖</span>
+    </li>
+  </ul>
+
+  <p style="margin-top:1.25rem; font-size:0.92rem; color:#666;">這是一個個人 side project，目前還在早期驗證階段。如果概念可行，會考慮捐給 <a href="https://vtaiwan.tw" style="color:var(--color-primary)">vTaiwan</a> 或 g0v 社群繼續推進。</p>
+</section>
+
+<hr class="divider">
+
+<section>
+  <span class="section-label">參與</span>
+  <h2>你可以做什麼</h2>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-num">1</div>
+      <h3>提交素材 URL</h3>
+      <p>看到和議題相關的文章、聲明、報導，直接貼 URL 進來。不需要判斷可信度，有代表性就夠。</p>
+    </div>
+    <div class="card">
+      <div class="card-num">2</div>
+      <h3>貢獻閒置 token</h3>
+      <p>如果你有 Claude / ChatGPT 的 token 快要重置，可以用來幫忙貼入素材原文或生成 INFORM 摘要。</p>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <h3>有興趣看看現在長什麼樣子？</h3>
+    <p>GitHub 上有原始碼和設計文件，也歡迎直接開 Issue 討論。</p>
+    <a href="https://github.com/ronnywang/civic-talk" class="btn-primary">到 GitHub 看 →</a>
+  </div>
+</section>
+
+<footer>
+  <a href="../">公民筆記首頁</a>　·　<a href="https://github.com/ronnywang/civic-notes">GitHub</a>
+</footer>
+
+</body>
+</html>
