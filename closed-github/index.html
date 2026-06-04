@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Closed GitHub：政府軟體採購的廠商鎖定解法｜公民筆記</title>
+<meta name="description" content="政府花錢開發的系統，程式碼交付後封存在光碟裡，下一個廠商根本看不到。這不只是浪費，這是讓廠商永久壟斷的制度設計。有個中間路徑可以解決這件事。">
+<link rel="stylesheet" href="../style.css">
+<style>
+  :root {
+    --color-primary: #2d6a8f;
+    --color-primary-dark: #1e4d6b;
+    --color-heading: #1a3550;
+    --color-hero-from: #eaf2f8;
+    --color-hero-to: #e2edf5;
+    --color-hero-title: #1a3550;
+    --color-card-bg: #f4f8fb;
+    --color-card-border: #c5d9e8;
+    --color-prompt-bg: #f2f6f9;
+    --color-highlight-bg: #fdf6ec;
+    --color-highlight-border: #e9a820;
+    --color-highlight-text: #5a4a20;
+  }
+
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.92rem;
+  }
+  .compare-table th {
+    background: var(--color-primary);
+    color: white;
+    padding: 0.6rem 1rem;
+    text-align: left;
+    font-weight: 700;
+  }
+  .compare-table td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid #e0e8f0;
+    vertical-align: top;
+  }
+  .compare-table tr:nth-child(even) td {
+    background: var(--color-card-bg);
+  }
+  .compare-table .check { color: #2a9d8f; font-weight: 700; }
+  .compare-table .cross { color: #e63946; font-weight: 700; }
+  .compare-table .partial { color: #e9a820; font-weight: 700; }
+
+  .flow-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 1.5rem 0;
+  }
+  .flow-step {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1rem 1.25rem;
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-card-border);
+    border-bottom: none;
+  }
+  .flow-step:first-child { border-radius: 8px 8px 0 0; }
+  .flow-step:last-child { border-radius: 0 0 8px 8px; border-bottom: 1px solid var(--color-card-border); }
+  .flow-num {
+    background: var(--color-primary);
+    color: white;
+    border-radius: 50%;
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.82rem; font-weight: 700;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .flow-step p { margin: 0; font-size: 0.95rem; }
+  .flow-step strong { display: block; margin-bottom: 0.2rem; }
+
+  .access-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  @media (max-width: 600px) { .access-grid { grid-template-columns: 1fr; } }
+  .access-card {
+    border: 1px solid var(--color-card-border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    background: var(--color-card-bg);
+  }
+  .access-card h4 {
+    font-size: 0.95rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+  }
+  .access-card p { font-size: 0.9rem; margin: 0; color: #555; }
+
+  .tag-new {
+    display: inline-block;
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    color: #856404;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.1em 0.6em;
+    border-radius: 4px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+
+  .open-list {
+    padding-left: 1.4rem;
+    color: #333;
+  }
+  .open-list li {
+    margin-bottom: 0.75rem;
+    font-size: 0.97rem;
+    line-height: 1.7;
+  }
+</style>
+</head>
+<body>
+
+<div class="site-nav">
+  <a href="../">← 公民筆記首頁</a>
+</div>
+
+<!-- ════ Hero ════ -->
+<div class="hero">
+  <div class="topic-label">政府採購 ／ 開源</div>
+  <h1>Closed GitHub<br>政府軟體廠商鎖定的中間解法</h1>
+  <p class="subtitle">程式碼交在光碟裡，封存二十年，沒有人再打開。<br>這不是意外，這是廠商壟斷的基礎建設。</p>
+</div>
+
+<!-- ════ 問題 ════ -->
+<section>
+  <span class="section-label">問題</span>
+  <h2>你的稅金蓋的系統，換個廠商要從零開始</h2>
+
+  <p>政府花了幾千萬委託廠商開發一套系統。合約到期，驗收完成，廠商交出一張光碟——裡面是程式碼。光碟被收進倉庫，從此沒有人再打開它。</p>
+
+  <p>五年後要換廠商了。新廠商問：現有系統的程式架構是什麼？用了哪些技術？資料庫怎麼設計的？</p>
+
+  <p>沒有人知道。光碟還在倉庫裡，但沒有人知道是哪一張，也沒有人知道怎麼跑起來。</p>
+
+  <p>所以新廠商有兩個選擇：一、從頭重寫，成本高風險大。二、繼續找舊廠商，因為只有他們知道系統長什麼樣子。</p>
+
+  <div class="highlight-box">
+    <strong>這不是記錄不良的問題，這是制度設計的問題。</strong><br>
+    現有採購模式下，廠商越不讓外人了解系統，換廠商成本就越高，自己就越難被取代。<strong>不透明是護城河。</strong>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ════ 現有「解法」的限制 ════ -->
+<section>
+  <span class="section-label">現有做法</span>
+  <h2>為什麼現有的解法不夠用</h2>
+
+  <p>這個問題不是沒有人想過，國際上有幾種機制試圖解決它：</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>機制</th>
+        <th>做了什麼</th>
+        <th>沒做到什麼</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Source Code Escrow<br>（程式碼託管）</strong></td>
+        <td>由中立第三方保管程式碼快照，廠商倒閉或違約時釋出給政府</td>
+        <td>靜態快照、沒有版本歷史；只保護政府，不開放給競爭廠商；目的是業務持續，不是促進競爭</td>
+      </tr>
+      <tr>
+        <td><strong>Public Code<br>（公共程式）</strong></td>
+        <td>政府直接將程式碼開源，所有人都可以用</td>
+        <td>廠商抗拒（智財疑慮）；政治阻力大；台灣目前連 git 管理都未建立，直接跳到開源是跳層</td>
+      </tr>
+      <tr>
+        <td><strong>美國 DFARS 技術資料存取</strong></td>
+        <td>允許第三方在 NDA 前提下存取技術資料</td>
+        <td>明確<em>排除</em>競爭廠商，只給非競爭的顧問用——方向和我們需要的完全相反</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>三種機制都有用，但都沒有解決核心問題：<strong>讓想來競爭的新廠商，在投標前能合法了解現有系統。</strong></p>
+</section>
+
+<hr class="divider">
+
+<!-- ════ 提案 ════ -->
+<section>
+  <span class="section-label">提案</span>
+  <h2>Closed GitHub：中間路徑 <span class="tag-new">尚無先例</span></h2>
+
+  <p>不要直接跳到完全開源，也不要繼續光碟封存。在這兩者之間，有一個中間地帶：</p>
+
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="flow-num">1</div>
+      <p><strong>改變程式碼交付方式</strong><br>驗收時，廠商不再交光碟或 ZIP，改為把程式碼提交到政府托管的私有 git repository。政府擁有這個 repo，有完整的版本歷史。</p>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">2</div>
+      <p><strong>預設封閉，但可申請存取</strong><br>Repo 預設為私有，不公開。但在簽署切結書的前提下，特定外部人士可以申請讀取權限。</p>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">3</div>
+      <p><strong>兩種存取目的</strong><br>目前設計的兩種合理使用情境：</p>
+    </div>
+  </div>
+
+  <div class="access-grid">
+    <div class="access-card">
+      <h4>🏢 潛在競標廠商</h4>
+      <p>切結聲明：「我是未來可能投標的廠商。我申請閱讀現有程式架構，僅用於了解系統現況和準備投標，不另做他用，不重製，不散布。」</p>
+    </div>
+    <div class="access-card">
+      <h4>🔍 資安廠商</h4>
+      <p>切結聲明：「我申請閱讀程式碼以進行弱點掃描。所有發現的弱點將全數回報給機關和現有廠商，不另做他用。」</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <strong>核心邏輯翻轉：</strong><br>
+    傳統的 NDA 是廠商保護自己智財不被洩漏的工具。Closed GitHub 把這個邏輯翻轉——用 NDA 作為<strong>讓競爭廠商合法進入</strong>的門票，而不是把他們擋在門外。
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ════ 這個做法解決了什麼 ════ -->
+<section>
+  <span class="section-label">效果</span>
+  <h2>這個做法能解決什麼</h2>
+
+  <p><strong>打破資訊壟斷。</strong> 目前新廠商不敢投標，部分原因是不知道現有系統有多複雜、有多少技術債。能先讀到程式碼，風險就可以被評估，投標意願自然提高。</p>
+
+  <p><strong>降低換廠商的實際門檻。</strong> 機關選擇換廠商時，最大的障礙之一是「新廠商不熟悉現有系統」。如果競標前就能讀到程式碼，這個障礙大幅降低。</p>
+
+  <p><strong>建立程式碼管理的基礎。</strong> 光碟驗收是個混亂的實務，版本無從追溯，歷史無從回顧。git 交付本身就是一個管理改善，和開不開源無關。</p>
+
+  <p><strong>給廠商保留的彈性。</strong> 切結書保護了廠商的著作權，現有程式碼不會被直接抄走或公開，降低廠商的抗拒。比強制開源政治阻力小很多。</p>
+</section>
+
+<hr class="divider">
+
+<!-- ════ 這個做法還沒解決什麼 ════ -->
+<section>
+  <span class="section-label">限制</span>
+  <h2>這個做法還沒解決的事</h2>
+
+  <p><strong>評審偏好的問題依然存在。</strong> 就算新廠商拿到程式碼、準備好了，評審仍可能因為「公司規模不夠大」而不選他們。資訊不對稱只是壟斷的一個來源，採購評審文化是另一個。</p>
+
+  <p><strong>誰來建和維運這個平台？</strong> 各部會不會互相管，不可能有中央單位強制各機關建。最合理的路徑可能是參考新加坡 GovTech 的 SHIP-HATS（政府統一托管的 GitLab），但這需要數發部有足夠的執行力，目前不確定。</p>
+
+  <p><strong>需要修改驗收標準，不需要動採購法。</strong> 好消息是，把「交光碟」改成「提交 git repo」不一定要修採購法，可能只要修驗收規範和契約範本。但仍需要某個有權力的單位推動。</p>
+</section>
+
+<hr class="divider">
+
+<!-- ════ 這個概念在全球的位置 ════ -->
+<section>
+  <span class="section-label">視角</span>
+  <h2>全球目前沒有類似做法</h2>
+
+  <p>調查顯示，各元素分別存在於不同國家，但<strong>把它們組合成「以促進競爭為目的的限制存取機制」，目前沒有任何國家實施過</strong>（截至 2026 年 6 月）。</p>
+
+  <p>最接近的：新加坡 SHIP-HATS（強制 git 交付，但不開放競爭廠商）；美國 SHARE IT Act（repo 管理，但只開放給其他政府機關）；美國 DFARS（NDA 存取，但明確排除競爭廠商）。</p>
+
+  <p>這個問題——廠商鎖定、程式碼封存、新廠商無法進入——在各國政府都存在，只是被不同形式的問題遮蓋。這個中間路徑可能對其他國家也適用。</p>
+</section>
+
+<hr class="divider">
+
+<!-- ════ 思考點 ════ -->
+<section>
+  <span class="section-label">開放問題</span>
+  <h2>還沒有答案的問題</h2>
+
+  <ul class="open-list">
+    <li>切結書在法律上有多大約束力？如果廠商違反切結書，能有效追究嗎？</li>
+    <li>機關有人力審核存取申請嗎？如果沒有，這個機制會變成另一個閒置的行政程序。</li>
+    <li>這個設計需要多大的推力才能啟動？數發部的指引夠嗎，還是一定要有法規強制？</li>
+    <li>如果一個機關願意試點，哪個機關最適合作為第一個案例？</li>
+  </ul>
+</section>
+
+<hr class="divider">
+
+<!-- ════ Prompt ════ -->
+<section>
+  <span class="section-label">帶去問 AI</span>
+  <h2>想深入討論，可以帶這個問題去問 AI</h2>
+
+  <div class="prompt-box">
+台灣政府軟體採購有個結構性問題：廠商交付程式碼後封存在光碟裡，新廠商看不到現有系統架構，導致既有廠商難以被取代。
+
+有人提出一個概念叫「Closed GitHub」：
+1. 驗收改為廠商提交程式碼到政府私有 git repo
+2. 在切結書前提下，開放兩種有限存取：
+   - 潛在競標廠商（目的：了解現有架構，準備投標）
+   - 資安廠商（目的：弱點掃描，結果全數回報）
+
+請問這個設計有哪些法律上或執行上的潛在問題？在台灣現行採購法規下，最小可行版本是什麼？
+  </div>
+</section>
+
+<footer>
+  <a href="../">← 公民筆記首頁</a>
+  ·
+  <a href="https://github.com/ronnywang/civic-notes">GitHub</a>
+</footer>
+
+</body>
+</html>
