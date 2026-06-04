@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>李多慧、北一女制服、男性凝視：這件事到底在吵什麼？</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #faf9f7;
+      --surface: #ffffff;
+      --border: #e8e4df;
+      --text: #1a1a1a;
+      --muted: #6b6560;
+      --accent: #2d6a8f;
+      --accent-light: #eef4f8;
+      --tag-blue: #dbeafe;
+      --tag-blue-text: #1e3a5f;
+      --tag-purple: #ede9fe;
+      --tag-purple-text: #4c1d95;
+      --tag-orange: #fef3c7;
+      --tag-orange-text: #78350f;
+      --tag-red: #fee2e2;
+      --tag-red-text: #7f1d1d;
+      --tag-green: #dcfce7;
+      --tag-green-text: #14532d;
+      --warn: #fffbeb;
+      --warn-border: #fcd34d;
+    }
+
+    body {
+      font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container { max-width: 780px; margin: 0 auto; padding: 0 24px; }
+
+    section { padding: 56px 0; border-bottom: 1px solid var(--border); }
+    section:last-child { border-bottom: none; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2d6a8f 60%, #4a8fad 100%);
+      color: white;
+      padding: 72px 0 64px;
+    }
+    .hero .container { display: flex; flex-direction: column; gap: 16px; }
+    .hero-label {
+      font-size: 12px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; opacity: 0.7;
+    }
+    .hero h1 { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 900; line-height: 1.3; }
+    .hero .subtitle { font-size: 1rem; opacity: 0.85; max-width: 560px; }
+    .hero-meta { font-size: 13px; opacity: 0.55; margin-top: 4px; }
+
+    /* ── SECTION TITLES ── */
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+    }
+    h2 { font-size: 1.45rem; font-weight: 800; margin-bottom: 20px; line-height: 1.3; }
+    h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; margin-top: 28px; }
+    h3:first-child { margin-top: 0; }
+
+    p { margin-bottom: 14px; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ── TAGS ── */
+    .tag {
+      display: inline-block; padding: 3px 10px; border-radius: 20px;
+      font-size: 12px; font-weight: 600; margin: 2px;
+    }
+    .tag-blue { background: var(--tag-blue); color: var(--tag-blue-text); }
+    .tag-purple { background: var(--tag-purple); color: var(--tag-purple-text); }
+    .tag-orange { background: var(--tag-orange); color: var(--tag-orange-text); }
+    .tag-red { background: var(--tag-red); color: var(--tag-red-text); }
+    .tag-green { background: var(--tag-green); color: var(--tag-green-text); }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px;
+    }
+    .card + .card { margin-top: 16px; }
+    .card-grid { display: grid; gap: 16px; }
+    @media (min-width: 600px) { .card-grid.col2 { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 600px) { .card-grid.col3 { grid-template-columns: 1fr 1fr 1fr; } }
+
+    /* ── BLOCKQUOTE ── */
+    blockquote {
+      border-left: 4px solid var(--accent);
+      background: var(--accent-light);
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      margin: 16px 0;
+      font-size: 0.95rem;
+      color: #1e3a5f;
+    }
+    blockquote p { margin: 0; }
+
+    /* ── MYTH/FACT ── */
+    .myth-item {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; overflow: hidden; margin-bottom: 12px;
+    }
+    .myth-row {
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 12px; padding: 14px 16px; align-items: start;
+    }
+    .myth-row + .myth-row { border-top: 1px solid var(--border); background: #f9fef9; }
+    .myth-icon { font-size: 1.1rem; padding-top: 1px; }
+    .myth-row p { font-size: 0.9rem; margin: 0; }
+    .myth-row strong { display: block; font-size: 11px; text-transform: uppercase;
+      letter-spacing: 1px; margin-bottom: 3px; color: var(--muted); }
+
+    /* ── NEWS PATTERN ── */
+    .news-pattern {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden; margin: 20px 0;
+    }
+    .news-pattern-header {
+      background: #fee2e2; padding: 14px 20px;
+      font-size: 0.88rem; font-weight: 700; color: #7f1d1d;
+      letter-spacing: 0.5px;
+    }
+    .news-step {
+      display: flex; gap: 14px; padding: 12px 20px;
+      border-top: 1px solid var(--border); align-items: flex-start;
+    }
+    .news-step-num {
+      background: var(--accent); color: white;
+      border-radius: 50%; width: 22px; height: 22px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+    }
+    .news-step p { font-size: 0.9rem; margin: 0; }
+
+    /* ── KEYWORD TABLE ── */
+    .kw-table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+    .kw-table th, .kw-table td {
+      padding: 10px 14px; text-align: left;
+      border-bottom: 1px solid var(--border); font-size: 0.88rem;
+    }
+    .kw-table th { font-weight: 700; background: var(--bg); color: var(--muted);
+      font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+    .kw-table tr:last-child td { border-bottom: none; }
+
+    /* ── VERSUS ── */
+    .versus-grid { display: grid; gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+      margin: 20px 0; }
+    @media (min-width: 600px) { .versus-grid { grid-template-columns: 1fr 80px 1fr; } }
+    .versus-side { background: var(--surface); padding: 20px 22px; }
+    .versus-side h4 { font-size: 0.95rem; font-weight: 800; margin-bottom: 8px; }
+    .versus-side p { font-size: 0.88rem; color: var(--muted); margin: 0; }
+    .versus-side.left h4 { color: #1e3a5f; }
+    .versus-side.right h4 { color: #6b21a8; }
+    .versus-mid {
+      background: var(--bg); display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800; color: var(--muted); letter-spacing: 1px;
+      padding: 12px 8px; text-align: center;
+    }
+    @media (max-width: 599px) {
+      .versus-mid { padding: 8px 22px; font-size: 11px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    }
+
+    /* ── BLINDSPOT BOX ── */
+    .blindspot-grid { display: grid; gap: 16px; margin-top: 20px; }
+    @media (min-width: 600px) { .blindspot-grid { grid-template-columns: 1fr 1fr; } }
+    .blindspot-card {
+      border-radius: 10px; padding: 18px 20px;
+    }
+    .blindspot-card.blue { background: #eff6ff; border: 1px solid #bfdbfe; }
+    .blindspot-card.purple { background: #faf5ff; border: 1px solid #e9d5ff; }
+    .blindspot-card h4 { font-size: 0.92rem; font-weight: 700; margin-bottom: 8px; }
+    .blindspot-card.blue h4 { color: #1e40af; }
+    .blindspot-card.purple h4 { color: #6b21a8; }
+    .blindspot-card p { font-size: 0.88rem; color: var(--muted); margin: 0; }
+
+    /* ── HARD Q ── */
+    .hard-q {
+      background: var(--warn); border: 1px solid var(--warn-border);
+      border-radius: 10px; padding: 16px 18px; margin-bottom: 10px;
+    }
+    .hard-q p { font-size: 0.92rem; margin: 0; }
+    .hard-q .q-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      color: #92400e; margin-bottom: 6px; text-transform: uppercase;
+    }
+
+    /* ── SOURCE PILLS ── */
+    .source-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 20px; padding: 4px 12px 4px 8px;
+      font-size: 12px; color: var(--muted); margin: 3px;
+      text-decoration: none; transition: border-color 0.15s;
+    }
+    .source-pill:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    .source-pill .dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    }
+
+    /* ── NOTICE ── */
+    .notice {
+      background: var(--accent-light); border: 1px solid #b8d4e8;
+      border-radius: 10px; padding: 14px 18px;
+      font-size: 0.88rem; color: #1e3a5f; margin-bottom: 24px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1e2d3d; color: #7a9ab5;
+      padding: 40px 0; font-size: 0.85rem; text-align: center;
+    }
+    footer a { color: #9bb3c7; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════ HERO ══════════════════════════════ -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-label">媒體識讀 · INFORM</div>
+    <h1>李多慧、北一女制服、男性凝視<br>這件事到底在吵什麼？</h1>
+    <p class="subtitle">從一則「挨轟新聞」出發，理解文化挪用、男性凝視、媒體操作這三件事</p>
+    <div class="hero-meta">閱讀時間約 3 分鐘 · 不需要背景知識 · 2026-06-04</div>
+  </div>
+</header>
+
+<!-- ══════════════════════════════ 事情始末 ══════════════════════════════ -->
+<section id="background">
+  <div class="container">
+    <div class="section-label">Section 01</div>
+    <h2>事情始末</h2>
+
+    <p>2025 年前後，台灣職棒啦啦隊文化突然爆紅，成為全球媒體關注的焦點。其中一個代表性人物是韓裔啦啦隊員<strong>李多慧</strong>，她以顏值、舞技和親和力在台灣累積了大量粉絲。</p>
+
+    <p>事件的引爆點是：李多慧在某次表演中，穿著與<strong>北一女中制服</strong>相近的服裝熱舞。社群媒體上隨即出現一些批評聲音，主要來自北一女校友群體，指控這是對學校文化的「消費」與「不尊重」。</p>
+
+    <div class="notice">
+      ⚠️ 「事情就這樣大條了嗎？」其實沒有——讓這件事「看起來很大條」的，主要是媒體的操作方式。這是本文想重點說明的事。
+    </div>
+
+    <p>在進入媒體操作的討論之前，先釐清幾個在討論中被頻繁使用的詞。</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ 名詞說明 ══════════════════════════════ -->
+<section id="terms">
+  <div class="container">
+    <div class="section-label">Section 02</div>
+    <h2>名詞說明</h2>
+
+    <h3>文化挪用（Cultural Appropriation）</h3>
+    <p>文化挪用指<strong>強勢文化借用弱勢文化的符號，卻不承擔那個文化背後的歷史重量</strong>。最典型的例子：美國白人表演者戴上原住民頭飾，只取其「酷」，不理解它的神聖意義。</p>
+
+    <blockquote>
+      <p>但這個框架套在李多慧事件上並不太合——<strong>北一女並不是一個弱勢或邊緣的文化群體</strong>。台灣升學考試的頂端菁英學校，很難被說成是需要保護的「弱勢文化」。就文化挪用的嚴格定義而言，這個指控「稍嫌言過其實」。</p>
+    </blockquote>
+
+    <h3>男性凝視（Male Gaze）</h3>
+    <p>男性凝視有很多定義，以下是目前最容易操作的版本：</p>
+
+    <blockquote>
+      <p>「男性凝視是把鏡頭或目光，預設在一個想佔有、想消費妳的男性視角上；它把一個活生生、有故事的人，簡化成了一個好看的物件。」</p>
+    </blockquote>
+
+    <p>兩個常見的誤解：</p>
+    <div class="myth-item">
+      <div class="myth-row">
+        <div class="myth-icon">❌</div>
+        <p><strong>常見誤解</strong>「男人欣賞美女就是男凝」</p>
+      </div>
+      <div class="myth-row">
+        <div class="myth-icon">✅</div>
+        <p><strong>更精確的說法</strong>真正的男凝是「客體化」——剝奪對方的靈魂與主體性，把她純粹當成一個滿足視覺或性慾的工具。你欣賞一位舞者的美麗與技藝，不是男凝。</p>
+      </div>
+    </div>
+    <div class="myth-item">
+      <div class="myth-row">
+        <div class="myth-icon">❌</div>
+        <p><strong>常見誤解</strong>「說這是男凝，就是在指控看的男人是壞人」</p>
+      </div>
+      <div class="myth-row">
+        <div class="myth-icon">✅</div>
+        <p><strong>更精確的說法</strong>說某個文化產品具有男凝，就像說「現在下雨了」，不是在說「你是造雨的壞人」。男性凝視是社會結構問題，不等於個人罪責。</p>
+      </div>
+    </div>
+
+    <h3>性別物化（Sexual Objectification）</h3>
+    <p>性別物化和男凝密切相關，指把有主體性的人，簡化為「可以被消費的物件」。</p>
+    <p>一個關鍵的補充：<strong>被物化的當事人，不一定有被物化的感覺</strong>。這是因為物化是一種結構性的傷害——它可能表現在其他人對你的看待方式上，或是對有相似特質的其他人的影響，而不只是你自己的主觀感受。</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ 為什麼變這麼大 ══════════════════════════════ -->
+<section id="media">
+  <div class="container">
+    <div class="section-label">Section 03</div>
+    <h2>這件事為什麼變這麼大？</h2>
+
+    <p>答案是：<strong>「挨轟新聞」的操作模式</strong>。</p>
+
+    <p>社群媒體上有人對李多慧的表演提出批評——這完全正常，任何公共事件都會有幾個人在網路上發文評論。但媒體接下來做的事，是把這幾則貼文轉化成這樣的標題：</p>
+
+    <div style="background:#fee2e2;border:1px solid #fca5a5;border-radius:10px;padding:16px 20px;margin:16px 0;">
+      <p style="font-size:0.95rem;font-weight:700;color:#7f1d1d;margin:0;">「李多慧穿北一女制服熱舞挨轟！校友提質疑『消費文化』」</p>
+    </div>
+
+    <p>讀者看到這個標題，腦海裡自動浮現的畫面是：大批北一女校友憤怒抗議。<strong>實際上發生的是：幾個人在 Threads 或 PTT 上發文表達意見。</strong></p>
+
+    <p>這個操作模式幾乎是公式化的：</p>
+
+    <div class="news-pattern">
+      <div class="news-pattern-header">「挨轟新聞」標準製作流程</div>
+      <div class="news-step">
+        <div class="news-step-num">1</div>
+        <p>找到 1～2 則批評貼文</p>
+      </div>
+      <div class="news-step">
+        <div class="news-step-num">2</div>
+        <p>用「挨轟」「被砲」「引發熱議」作為標題</p>
+      </div>
+      <div class="news-step">
+        <div class="news-step-num">3</div>
+        <p>讀者看到「北一女校友反彈」，自動腦補為廣泛的群體立場</p>
+      </div>
+      <div class="news-step">
+        <div class="news-step-num">4</div>
+        <p>觸發情緒（對批評者不滿、對偶像的保護感）</p>
+      </div>
+      <div class="news-step">
+        <div class="news-step-num">5</div>
+        <p>情緒驅動分享，分享帶來廣告點閱率 💰</p>
+      </div>
+    </div>
+
+    <p>這種新聞的存在邏輯不是傳遞資訊，而是<strong>出售情緒</strong>。它的代價：讓讀者對「北一女校友」這個群體產生不必要的負面印象；把一個可以好好討論的文化議題，轉化成族群對立的情緒衝突；讓真正值得討論的問題消失不見。</p>
+
+    <p>最諷刺的是：這種媒體操作，對那些真正在乎文化挪用或性別議題的人傷害最深——它一邊消費他們的議題，一邊破壞這些議題傳播的土壤。</p>
+
+    <h3>辨識關鍵字</h3>
+    <p>當你看到以下標題詞，先暫停一秒：</p>
+
+    <table class="kw-table">
+      <thead>
+        <tr><th>標題詞</th><th>可能的真實情況</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>挨轟、被砲、遭批</strong></td><td>可能只有幾則負面留言</td></tr>
+        <tr><td><strong>引發熱議</strong></td><td>有人在討論，但不代表有共識</td></tr>
+        <tr><td><strong>網友怒了、民眾反彈</strong></td><td>找到幾個表達憤怒的人</td></tr>
+        <tr><td><strong>XX族群不滿</strong></td><td>該族群有人發言，不代表整體立場</td></tr>
+        <tr><td><strong>一片叫好、讚聲不斷</strong></td><td>同理，可能也只是幾則正面留言</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ 各方爭點 ══════════════════════════════ -->
+<section id="debate">
+  <div class="container">
+    <div class="section-label">Section 04</div>
+    <h2>各方爭點</h2>
+
+    <p>媒體製造的表面衝突消退之後，真正值得討論的爭點是什麼？</p>
+
+    <!-- 爭點一 -->
+    <div class="card" style="margin-bottom:16px;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;">爭點一</div>
+      <h3 style="margin-top:0;">文化符號的使用邊界</h3>
+      <p>北一女制服在台灣語境裡，已經是某種「<strong>小型國族符號</strong>」——承載著菁英教育、青春記憶、考試壓力，以及某種被國家教育體制認證過的「優秀女性」形象。</p>
+      <p><a href="https://www.facebook.com/772675694/posts/10166381352735695/" target="_blank" rel="noopener">林靖堂的分析</a>提出：這場爭議觸動情緒，有一部分來自台灣人長期以來「我們的符號到底是我們說了算，還是誰有流量誰說了算」的深層焦慮——這和台灣長期被外部力量命名、代表、消費的歷史有結構上的共鳴。</p>
+      <p>他同時也指出了一個值得警惕的矛盾：<em>有些批評者平常不承認台灣文化的主體性，卻在制服被外國人穿上時突然強調文化邊界</em>——保護的可能不是台灣文化，而是自己的<strong>菁英地盤</strong>。</p>
+    </div>
+
+    <!-- 爭點二 -->
+    <div class="card" style="margin-bottom:16px;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;">爭點二</div>
+      <h3 style="margin-top:0;">啦啦隊文化的方向問題</h3>
+      <p>這個爭點比制服本身更根本。台灣職棒啦啦隊越來越以外形、細腰、性感為主要賣點；男性球迷的狂粉留言有時露骨不堪；男生在應援中幾乎沒有角色。</p>
+      <p>把這個文化和以特技競技為主的美國高中啦啦隊、以整齊手勢為主的日本應援文化相比，落差是明顯的。</p>
+      <p><a href="https://www.facebook.com/GreenMeadow/posts/pfbid02ouDXmeL3VYn6NhrWTuBKWCTRYLcKQoTsYG6EEPkcowJZf2HYQ8VYCefo9VZEVw9sl" target="_blank" rel="noopener">Yi-Ling Huang 的分析</a>特別指出了未成年的維度：北一女學生是未成年少女；把未成年女性的形象拿來和「可欲化」連結，是養成特定傷害文化的上游機制。</p>
+      <p>爭議不在李多慧這個人，而在<strong>這個文化整體往哪個方向走</strong>。</p>
+    </div>
+
+    <!-- 爭點三：男凝派 vs 性自主派 -->
+    <div class="card">
+      <div style="font-size:11px;font-weight:700;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;">爭點三</div>
+      <h3 style="margin-top:0;">男凝派 vs 性自主派——這不是對立，是時間點的不同</h3>
+
+      <p>表面上看，討論的聲音分成兩派：</p>
+
+      <div class="versus-grid">
+        <div class="versus-side left">
+          <h4>男凝派（性物化反對派）</h4>
+          <p>這個文化在強化男性凝視的結構，不健康，應該改變。即使當事人自願，也不能否定這個結構性問題的存在。</p>
+        </div>
+        <div class="versus-mid">VS</div>
+        <div class="versus-side right">
+          <h4>性自主派</h4>
+          <p>啦啦隊成員是自願選擇的，她們也可以享受被觀看。旁人憑什麼否定她的選擇？主體性就是主體性。</p>
+        </div>
+      </div>
+
+      <p>但如果再深一層看，<strong>兩派都想要的是女性有真正的自由</strong>。分歧點在於：</p>
+
+      <blockquote>
+        <p>在充滿結構性壓力的環境裡，「自願」的意義是什麼？</p>
+      </blockquote>
+
+      <ul style="padding-left:20px;margin-bottom:14px;font-size:0.95rem;">
+        <li style="margin-bottom:6px;"><strong>性自主派說</strong>：在現在這個脈絡下，尊重當事人的選擇。</li>
+        <li><strong>男凝派說</strong>：先把脈絡改掉，選擇才算真的自由。</li>
+      </ul>
+
+      <p>這是<strong>時間點的不同，不是價值觀的不同</strong>。</p>
+
+      <div class="blindspot-grid">
+        <div class="blindspot-card blue">
+          <h4>性自主派的盲點</h4>
+          <p>在充滿結構性壓力的環境下，「自願」兩個字的意義是模糊的。</p>
+        </div>
+        <div class="blindspot-card purple">
+          <h4>男凝派的盲點</h4>
+          <p>說「妳的選擇不是真正的自由選擇」，本身也是一種否定當事人主體性的操作。</p>
+        </div>
+      </div>
+
+      <p style="margin-top:16px;font-size:0.9rem;color:var(--muted);">這個張力目前沒有人解決掉了。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ 思考點 ══════════════════════════════ -->
+<section id="reflection">
+  <div class="container">
+    <div class="section-label">Section 05</div>
+    <h2>思考點</h2>
+    <p>以下沒有標準答案，是留給你自己想的問題。</p>
+
+    <h3>關於媒體</h3>
+    <div class="hard-q">
+      <div class="q-label">Q1</div>
+      <p>你上週看到幾則「挨轟新聞」？每一則背後到底有幾個人在「挨轟」？如果你知道背後只有三個人發文，你還會點進去看嗎？</p>
+    </div>
+    <div class="hard-q">
+      <div class="q-label">Q2</div>
+      <p>批評「這則新聞的操作方式」和「這個議題不值得討論」是兩件不同的事——但很容易被混為一談。你遇過這種誤讀嗎？</p>
+    </div>
+
+    <h3>關於文化符號</h3>
+    <div class="hard-q">
+      <div class="q-label">Q3</div>
+      <p>什麼條件下，使用一個文化符號是「挪用」？什麼條件下是「傳播」？這條線由誰的感受決定？</p>
+    </div>
+    <div class="hard-q">
+      <div class="q-label">Q4</div>
+      <p>如果北一女學生自己也以類似的方式穿自己的制服，文化規範的「正當性」從哪裡來？</p>
+    </div>
+
+    <h3>關於結構與選擇</h3>
+    <div class="hard-q">
+      <div class="q-label">Q5</div>
+      <p>你同意「在不平等的結構裡，自願的意義是模糊的」嗎？如果同意，這個邏輯的邊界在哪裡？什麼時候「脈絡影響選擇」變成了「否定當事人主體性」？</p>
+    </div>
+    <div class="hard-q">
+      <div class="q-label">Q6</div>
+      <p>如果你是受益於某個結構的一方（例如這件事裡的生理男性），你會如何看待自己在這個議題上的「直覺」？</p>
+    </div>
+
+    <h3>關於改變</h3>
+    <div class="hard-q">
+      <div class="q-label">Q7</div>
+      <p>你認為觀念改變靠什麼最有效？道理、故事、政策、還是世代替換？你見過哪些討論，讓你對這個議題的看法真的改變了？</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ 參考來源 ══════════════════════════════ -->
+<section id="sources" style="padding-bottom:40px;">
+  <div class="container">
+    <div class="section-label">參考來源</div>
+    <h2>延伸閱讀</h2>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:20px;">本文整理自多位作者的公開分析，以下為可公開連結的原始文章：</p>
+
+    <a class="source-pill" href="https://www.facebook.com/GreenMeadow/posts/pfbid02ouDXmeL3VYn6NhrWTuBKWCTRYLcKQoTsYG6EEPkcowJZf2HYQ8VYCefo9VZEVw9sl" target="_blank" rel="noopener">
+      <span class="dot" style="background:#3b82f6;"></span>
+      Yi-Ling Huang：男性凝視分析（Facebook，2026-05-29）
+    </a>
+    <a class="source-pill" href="https://www.facebook.com/772675694/posts/10166381352735695/" target="_blank" rel="noopener">
+      <span class="dot" style="background:#10b981;"></span>
+      林靖堂：被看見，不等於被理解（Facebook，2026-06-03）
+    </a>
+    <a class="source-pill" href="https://www.facebook.com/yuanfei0808/posts/pfbid0eK83B4KJrysTmfBLMAwVT9xoFft1bZS9BBvU86o4JAQMyvJwVJeY1mhkhkT3wiR3l" target="_blank" rel="noopener">
+      <span class="dot" style="background:#8b5cf6;"></span>
+      手槍女王：關於男凝的自白書（Facebook，2026-06-03）
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>整理自 Ronny 的 brainstorming 筆記 · 2026-06-04</p>
+  </div>
+</footer>
+
+</body>
+</html>
