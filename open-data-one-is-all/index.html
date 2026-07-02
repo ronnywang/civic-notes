@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一即是全，全即是一｜給數位發展部的提案</title>
+<meta name="description" content="各機關各別上傳政府開放資料，是個注定失敗的架構。這份提案建議數發部建立自動化合規監測地圖，用可見度取代協調。">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0C1A30;--navy2:#16274A;
+  --white:#fff;--off:#EEF2F7;
+  --t1:#0C1A30;--t2:#4A6278;--t3:#8099B0;
+  --red:#BB1A2B;--red-bg:#FFF2F3;
+  --amber:#9A6200;--amber-bg:#FFF9ED;
+  --green:#146B39;--green-bg:#F0FBF4;
+  --blue:#1A4EA6;--blue-bg:#EEF4FF;
+  --border:#D1D9E4;--border-lt:#E8EDF4;
+}
+body{font-family:-apple-system,"PingFang TC","Microsoft JhengHei","Heiti TC",sans-serif;color:var(--t1);background:var(--white);line-height:1.7;-webkit-font-smoothing:antialiased;font-size:16px}
+.wrap{max-width:940px;margin:0 auto;padding:0 2rem}
+section{padding:5rem 0}
+
+/* Hero */
+.hero{background:var(--navy);padding:7rem 0 6rem;color:#fff}
+.hero-eye{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:2.2rem}
+.hero-title{font-size:clamp(3rem,7.5vw,6rem);font-weight:800;line-height:1.02;letter-spacing:-.035em;color:#fff;margin-bottom:2rem}
+.hero-title em{font-style:normal;color:rgba(255,255,255,.38)}
+.hero-sub{font-size:clamp(.95rem,1.6vw,1.15rem);color:rgba(255,255,255,.62);max-width:540px;line-height:1.9;margin-bottom:3rem}
+.hero-bar{display:flex;align-items:center;gap:2rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1);font-size:.82rem;color:rgba(255,255,255,.4);flex-wrap:wrap}
+.hero-bar strong{color:rgba(255,255,255,.8)}
+
+/* Section headers */
+.sec-eye{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:.9rem}
+.sec-h{font-size:clamp(1.5rem,2.8vw,2rem);font-weight:700;line-height:1.25;letter-spacing:-.015em;margin-bottom:.8rem}
+.sec-lead{font-size:1.05rem;color:var(--t2);line-height:1.8;max-width:620px}
+
+/* Problem scoreboard */
+.problem-section{background:var(--white);border-bottom:1px solid var(--border)}
+.scoreboard{display:grid;grid-template-columns:1fr 1fr;margin-top:3rem;border:1.5px solid var(--border);border-radius:12px;overflow:hidden}
+.score-col{background:var(--white)}
+.score-col+.score-col{border-left:1.5px solid var(--border)}
+.score-head{padding:1.6rem 2rem 1.2rem;border-bottom:1.5px solid var(--border-lt);display:flex;align-items:flex-start;gap:1rem}
+.score-icon{width:34px;height:34px;border-radius:7px;background:var(--red-bg);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;margin-top:.1rem}
+.score-label{font-weight:700;font-size:.92rem;line-height:1.3}
+.score-label small{display:block;font-weight:400;font-size:.75rem;color:var(--t3);margin-top:.1rem}
+.stats{display:flex;flex-direction:column;gap:0}
+.stat{padding:1.8rem 2rem;border-bottom:1px solid var(--border-lt)}
+.stat:last-child{border-bottom:none}
+.stat-n{font-size:clamp(2.4rem,5vw,3.8rem);font-weight:800;line-height:1;letter-spacing:-.04em;color:var(--red);font-variant-numeric:tabular-nums;display:block;margin-bottom:.4rem}
+.stat-d{font-size:.86rem;color:var(--t2);line-height:1.5}
+.stat-src{font-size:.71rem;color:var(--t3);margin-top:.25rem;font-style:italic}
+
+/* Cause */
+.cause-section{background:var(--off)}
+.cause-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+.cause-card{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:2rem}
+.cause-card.now{border-top:3px solid var(--red)}
+.cause-card.future{border-top:3px solid var(--green)}
+.cause-card-label{font-size:.7rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin-bottom:1rem}
+.cause-card.now .cause-card-label{color:var(--red)}
+.cause-card.future .cause-card-label{color:var(--green)}
+.cause-card h3{font-size:1rem;font-weight:700;margin-bottom:.9rem}
+.cause-list{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.cause-list li{font-size:.88rem;color:var(--t2);padding-left:1.2rem;position:relative;line-height:1.55}
+.cause-list li::before{content:'—';position:absolute;left:0;color:var(--t3)}
+.cause-card.future .cause-list li::before{content:'→';color:var(--green)}
+
+/* Proposal mockup */
+.proposal-section{background:var(--white)}
+.mock{background:var(--navy);border-radius:12px;padding:2rem;margin-top:2.5rem}
+.mock-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,.08);flex-wrap:wrap;gap:.75rem}
+.mock-bar-left{font-weight:700;font-size:.88rem;color:#fff}
+.mock-bar-left span{display:block;font-size:.7rem;color:rgba(255,255,255,.38);font-weight:400;margin-top:.15rem}
+.mock-legend{display:flex;gap:1rem;flex-wrap:wrap}
+.mock-li{display:flex;align-items:center;gap:.4rem;font-size:.7rem;color:rgba(255,255,255,.45)}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot-g{background:#22C55E}.dot-y{background:#EAB308}.dot-r{background:#EF4444}.dot-x{background:rgba(255,255,255,.2)}
+.mock-tabs{display:flex;gap:.5rem;margin-bottom:1.2rem}
+.mtab{border:none;border-radius:100px;padding:.3rem .85rem;font-size:.76rem;font-weight:600;cursor:pointer;font-family:inherit}
+.mtab.on{background:rgba(255,255,255,.14);color:#fff}
+.mtab.off{background:transparent;color:rgba(255,255,255,.35)}
+.tc{display:none}.tc.on{display:block}
+.mock-tbl{width:100%;border-collapse:collapse;font-size:.8rem}
+.mock-tbl th{text-align:left;color:rgba(255,255,255,.35);font-size:.65rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:.5rem .7rem .8rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.mock-tbl td{padding:.6rem .7rem;border-bottom:1px solid rgba(255,255,255,.05);color:rgba(255,255,255,.8)}
+.mock-tbl tr:last-child td{border-bottom:none}
+.pill{display:inline-flex;align-items:center;gap:.35rem;padding:.18rem .6rem;border-radius:100px;font-size:.7rem;font-weight:600;white-space:nowrap}
+.pill-g{background:rgba(34,197,94,.14);color:#4ADE80}
+.pill-y{background:rgba(234,179,8,.14);color:#FDE047}
+.pill-r{background:rgba(239,68,68,.14);color:#FCA5A5}
+.pill-x{background:rgba(255,255,255,.07);color:rgba(255,255,255,.35)}
+.mock-note{margin-top:1rem;padding-top:.8rem;border-top:1px solid rgba(255,255,255,.06);font-size:.7rem;color:rgba(255,255,255,.28);font-style:italic}
+
+/* Insight */
+.insight-section{background:var(--blue-bg);border-top:1px solid #C9D9F5;border-bottom:1px solid #C9D9F5}
+.insight-box{background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:2.5rem;margin-top:2rem}
+.insight-big{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:700;color:var(--blue);line-height:1.35;letter-spacing:-.015em}
+.insight-big span{color:var(--t1)}
+.insight-proof{margin-top:1.8rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.ip{background:var(--blue-bg);border-radius:8px;padding:1.2rem 1.4rem}
+.ip-n{font-size:2rem;font-weight:800;color:var(--blue);letter-spacing:-.02em;display:block;margin-bottom:.25rem;font-variant-numeric:tabular-nums}
+.ip-d{font-size:.82rem;color:var(--t2);line-height:1.5}
+.insight-implication{margin-top:1.5rem;padding-top:1.5rem;border-top:1.5px solid var(--border-lt);font-size:.92rem;color:var(--t2);line-height:1.7}
+
+/* Roles */
+.roles-section{background:var(--white)}
+.role-grid{display:grid;grid-template-columns:3fr 2fr;gap:1.5rem;margin-top:2rem}
+.role-card{border:1.5px solid var(--border);border-radius:10px;padding:2rem}
+.role-card.primary{border-color:var(--blue);background:var(--blue-bg)}
+.role-badge{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.22rem .7rem;border-radius:100px;margin-bottom:1rem}
+.rb-primary{background:#D1E2FF;color:var(--blue)}
+.rb-secondary{background:var(--border-lt);color:var(--t3)}
+.role-card h3{font-size:1rem;font-weight:700;margin-bottom:.9rem;line-height:1.3}
+.role-card ul{list-style:none;display:flex;flex-direction:column;gap:.65rem}
+.role-card li{font-size:.88rem;color:var(--t2);padding-left:1.3rem;position:relative;line-height:1.5}
+.role-card.primary li{color:var(--t1)}
+.role-card li::before{content:'→';position:absolute;left:0;color:var(--blue);font-size:.82rem}
+.role-card.secondary li::before{content:'·';color:var(--t3);font-size:1rem;top:-.05rem}
+.role-card .role-note{margin-top:1.2rem;padding:.8rem 1rem;background:rgba(255,255,255,.7);border-radius:6px;font-size:.8rem;color:var(--t2);line-height:1.5}
+
+/* Roadmap */
+.road-section{background:var(--off)}
+.roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1.5px solid var(--border);border-radius:10px;overflow:hidden;margin-top:2.5rem}
+.step{background:var(--white);padding:2rem 1.8rem}
+.step-n{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:.75rem}
+.step-h{font-size:.97rem;font-weight:700;margin-bottom:.6rem;line-height:1.4}
+.step-b{font-size:.83rem;color:var(--t2);line-height:1.65}
+.step-tag{display:inline-block;margin-top:.75rem;font-size:.68rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:.18rem .55rem;border-radius:4px}
+.tag-now{background:var(--green-bg);color:var(--green)}
+.tag-dep{background:var(--amber-bg);color:var(--amber)}
+.tag-auto{background:var(--blue-bg);color:var(--blue)}
+
+/* CTA */
+.cta-section{background:var(--navy);padding:6rem 0;text-align:center}
+.cta-h{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;color:#fff;margin-bottom:1rem;letter-spacing:-.015em}
+.cta-sub{color:rgba(255,255,255,.55);font-size:1rem;max-width:440px;margin:0 auto 2.5rem;line-height:1.8}
+.contact{display:inline-flex;flex-direction:column;gap:.35rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:1.5rem 3rem}
+.contact-name{font-weight:700;color:#fff;font-size:.95rem}
+.contact-det{color:rgba(255,255,255,.45);font-size:.85rem}
+
+@media(max-width:680px){
+  .scoreboard,.cause-grid,.insight-proof,.role-grid,.roadmap{grid-template-columns:1fr}
+  .score-col+.score-col{border-left:none;border-top:1.5px solid var(--border)}
+}
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap">
+    <p class="hero-eye">給數位發展部的提案 · 2026年7月</p>
+    <h1 class="hero-title">一即是全，<br><em>全即是一</em></h1>
+    <p class="hero-sub">各機關各別上傳資料，是個注定失敗的架構。<br>數發部可以用一個視覺化合規地圖，把「上傳了」與「能用」之間的落差，變成全社會看得見的公共壓力。</p>
+    <div class="hero-bar">
+      <span>提案人：<strong>王向榮（歐噴）</strong></span>
+      <span>資料依據：data.gov.tw 完整清單 52,989 筆 · 驗證日期 2026-06-08／2026-07-02</span>
+    </div>
+  </div>
+</section>
+
+<!-- Problem scoreboard -->
+<section class="problem-section">
+  <div class="wrap">
+    <p class="sec-eye">問題的規模</p>
+    <h2 class="sec-h">「有上傳」與「能用」之間，是一道巨大的落差</h2>
+    <p class="sec-lead">以下兩個主題的資料，全部親自下載驗證。數字不是估計。</p>
+
+    <div class="scoreboard">
+      <div class="score-col">
+        <div class="score-head">
+          <div class="score-icon">📊</div>
+          <div class="score-label">政府預算資料<small>data.gov.tw · 4,596 筆 · 337 個機關</small></div>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-n">100%</span>
+            <div class="stat-d">主計總處四張核心表全數不可存取——245 筆被 Cloudflare 封鎖、148 筆 URL 含中文字元失敗，可下載筆數 = 0</div>
+            <div class="stat-src">驗證方法：對 www.dgbas.gov.tw 的 393 筆 URL 逐一發出 HTTP 請求</div>
+          </div>
+          <div class="stat">
+            <span class="stat-n">9縣市</span>
+            <div class="stat-d">完全缺席——新竹縣、雲林、嘉義縣、屏東、臺東、基隆、澎湖、金門、連江，有預算、有主計處，就是沒有上傳</div>
+          </div>
+          <div class="stat">
+            <span class="stat-n">45.3%</span>
+            <div class="stat-d">計畫說明提要覆蓋率（114年），且從未超過 50%。239 個機關中 115 個（48.1%）完全沒有上傳，涵蓋 687 個工作計劃</div>
+          </div>
+          <div class="stat">
+            <span class="stat-n">38%</span>
+            <div class="stat-d">標示格式為 XML 的資料，實際內容是 CSV——格式標示由機關自填、平台無驗證，完全不可信</div>
+            <div class="stat-src">對全站 26,247 個 URL 實際下載分類後統計</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="score-col">
+        <div class="score-head">
+          <div class="score-icon">🗺</div>
+          <div class="score-label">公告地價 / 公告土地現值<small>data.gov.tw · 1,251 筆 · 28 個機關</small></div>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-n">3種</span>
+            <div class="stat-d">根本無法合併的資料型態：逐筆地號明細（型態A）、行政區統計彙總（型態B）、最高最低地價統計（型態C）——強行合併無意義</div>
+          </div>
+          <div class="stat">
+            <span class="stat-n">5種+</span>
+            <div class="stat-d">同一概念「公告土地現值」的欄位名稱——<code>公告土地現值</code>、<code>公告現值</code>、<code>公告現值-金額元（新台幣）：當期</code>、<code>CURRENTVALUE</code>……</div>
+          </div>
+          <div class="stat">
+            <span class="stat-n">421筆</span>
+            <div class="stat-d">新北市地政局上傳的資料，實際是目錄索引——CSV 欄位為 <code>f1_year, f2_producturl, seqno</code>，真實資料在連結裡，且部分失效</div>
+            <div class="stat-src">資料集 ID 125832，親自下載驗證</div>
+          </div>
+          <div class="stat">
+            <span class="stat-n">4種</span>
+            <div class="stat-d">地號格式：帶連字號（基隆 <code>0004-0005</code>）、8位（高雄 <code>01570002</code>）、5位（花蓮 <code>10000</code>）、純數字代碼（金門）——無法自動合併</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Cause -->
+<section class="cause-section">
+  <div class="wrap">
+    <p class="sec-eye">根本原因</p>
+    <h2 class="sec-h">這不是態度問題，是架構問題</h2>
+    <p class="sec-lead">要求各機關「上傳得更好」解決不了問題，因為問題的根源是「各機關自行上傳」這個設計本身。</p>
+    <div class="cause-grid">
+      <div class="cause-card now">
+        <div class="cause-card-label">現況——分散式上傳</div>
+        <h3>每個機關各自決定格式、欄位、更新頻率</h3>
+        <ul class="cause-list">
+          <li>沒有人有責任確認別人上傳的資料是否可用</li>
+          <li>格式選擇由機關自填，平台不驗證實際內容</li>
+          <li>同一套格式在不同機關標為 XML 或 ZIP，使用者無從篩選</li>
+          <li>沒有人追蹤「連結是否失效」、「去年有傳今年沒傳」</li>
+          <li>縣市政府缺席，沒有機制可以施壓</li>
+        </ul>
+      </div>
+      <div class="cause-card future">
+        <div class="cause-card-label">破局點——可見度</div>
+        <h3>把「協調難題」轉換成「可見度問題」</h3>
+        <ul class="cause-list">
+          <li>資料既然公開發布，就可以被公開評估——不需要機關同意</li>
+          <li>自動化驗證：程式每日跑一次，結果客觀可重現</li>
+          <li>地圖公開後，機關的選項只有兩個：改善，或承擔紅燈的難堪</li>
+          <li>地方議員有政治動機拿這張地圖去質詢縣長，無需額外說服</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Proposal mockup -->
+<section class="proposal-section">
+  <div class="wrap">
+    <p class="sec-eye">提案：一即是全</p>
+    <h2 class="sec-h">在 data.gov.tw 建立「一即是全」合規監測專區</h2>
+    <p class="sec-lead">以下是這個專區的概念示意——用程式自動評分，不靠機關自評。這是基於預算和公告地價的真實現況模擬。</p>
+
+    <div class="mock">
+      <div class="mock-bar">
+        <div class="mock-bar-left">
+          一即是全 · 開放資料合規監測
+          <span>自動驗證 · 每日更新 · 以 2026-07-02 資料為準</span>
+        </div>
+        <div class="mock-legend">
+          <span class="mock-li"><span class="dot dot-g"></span>合規</span>
+          <span class="mock-li"><span class="dot dot-y"></span>部分達標</span>
+          <span class="mock-li"><span class="dot dot-r"></span>未達標</span>
+          <span class="mock-li"><span class="dot dot-x"></span>未提供</span>
+        </div>
+      </div>
+
+      <div class="mock-tabs">
+        <button class="mtab on" onclick="switchTab('budget',this)">預算資料</button>
+        <button class="mtab off" onclick="switchTab('land',this)">公告地價</button>
+      </div>
+
+      <div id="budget" class="tc on">
+        <div style="overflow-x:auto">
+        <table class="mock-tbl">
+          <thead>
+            <tr>
+              <th>機關</th>
+              <th>歲出機關別</th>
+              <th>歲出政事別</th>
+              <th>計畫說明提要</th>
+              <th>歲入來源別</th>
+              <th>整體評分</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>主計總處（中央）</td><td><span class="pill pill-r">🔴 死連結</span></td><td><span class="pill pill-r">🔴 死連結</span></td><td><span class="pill pill-x">— 未提供</span></td><td><span class="pill pill-r">🔴 死連結</span></td><td><span class="pill pill-r">🔴 紅燈</span></td></tr>
+            <tr><td>臺北市</td><td><span class="pill pill-g">🟢 CSV+XML</span></td><td><span class="pill pill-g">🟢 CSV+XML</span></td><td><span class="pill pill-x">— 未提供</span></td><td><span class="pill pill-g">🟢 有</span></td><td><span class="pill pill-y">🟡 黃燈</span></td></tr>
+            <tr><td>新北市</td><td><span class="pill pill-g">🟢 CSV</span></td><td><span class="pill pill-g">🟢 CSV</span></td><td><span class="pill pill-x">— 未提供</span></td><td><span class="pill pill-g">🟢 有</span></td><td><span class="pill pill-y">🟡 黃燈</span></td></tr>
+            <tr><td>高雄市</td><td><span class="pill pill-g">🟢 CSV</span></td><td><span class="pill pill-g">🟢 CSV</span></td><td><span class="pill pill-x">— 未提供</span></td><td><span class="pill pill-g">🟢 有</span></td><td><span class="pill pill-y">🟡 黃燈</span></td></tr>
+            <tr><td>臺中市</td><td><span class="pill pill-y">🟡 其他格式</span></td><td><span class="pill pill-y">🟡 其他格式</span></td><td><span class="pill pill-x">— 未提供</span></td><td><span class="pill pill-y">🟡 其他格式</span></td><td><span class="pill pill-y">🟡 黃燈</span></td></tr>
+            <tr><td>新竹縣</td><td><span class="pill pill-r">🔴 未上傳</span></td><td><span class="pill pill-r">🔴 未上傳</span></td><td><span class="pill pill-r">🔴 未上傳</span></td><td><span class="pill pill-r">🔴 未上傳</span></td><td><span class="pill pill-r">🔴 紅燈</span></td></tr>
+            <tr><td>雲林縣</td><td><span class="pill pill-r">🔴 未上傳</span></td><td><span class="pill pill-r">🔴 未上傳</span></td><td><span class="pill pill-r">🔴 未上傳</span></td><td><span class="pill pill-r">🔴 未上傳</span></td><td><span class="pill pill-r">🔴 紅燈</span></td></tr>
+            <tr><td>屏東縣</td><td><span class="pill pill-r">🔴 未上傳</span></td><td><span class="pill pill-r">🔴 未上傳</span></td><td><span class="pill pill-r">🔴 未上傳</span></td><td><span class="pill pill-r">🔴 未上傳</span></td><td><span class="pill pill-r">🔴 紅燈</span></td></tr>
+            <tr><td>金門縣</td><td><span class="pill pill-r">🔴 未上傳</span></td><td><span class="pill pill-r">🔴 未上傳</span></td><td><span class="pill pill-r">🔴 未上傳</span></td><td><span class="pill pill-r">🔴 未上傳</span></td><td><span class="pill pill-r">🔴 紅燈</span></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p class="mock-note">以上為真實資料。完整版含 22 縣市、全部中央部會，以及計畫說明提要逐機關覆蓋率。</p>
+      </div>
+
+      <div id="land" class="tc">
+        <div style="overflow-x:auto">
+        <table class="mock-tbl">
+          <thead>
+            <tr>
+              <th>機關</th>
+              <th>資料型態</th>
+              <th>編碼</th>
+              <th>欄位一致性</th>
+              <th>可批次下載</th>
+              <th>整體評分</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>基隆市地政處</td><td>逐筆地號明細</td><td><span class="pill pill-g">🟢 UTF-8</span></td><td><span class="pill pill-g">🟢 標準</span></td><td><span class="pill pill-g">🟢 可</span></td><td><span class="pill pill-g">🟢 綠燈</span></td></tr>
+            <tr><td>宜蘭縣政府</td><td>逐筆地號明細</td><td><span class="pill pill-g">🟢 UTF-8</span></td><td><span class="pill pill-y">🟡 代碼混用</span></td><td><span class="pill pill-g">🟢 可</span></td><td><span class="pill pill-y">🟡 黃燈</span></td></tr>
+            <tr><td>桃園市地政局</td><td>逐筆地號明細</td><td><span class="pill pill-r">🔴 無法解碼</span></td><td><span class="pill pill-r">🔴 亂碼</span></td><td><span class="pill pill-r">🔴 否</span></td><td><span class="pill pill-r">🔴 紅燈</span></td></tr>
+            <tr><td>新北市地政局</td><td>目錄索引</td><td><span class="pill pill-r">🔴 非資料</span></td><td><span class="pill pill-r">🔴 無欄位</span></td><td><span class="pill pill-r">🔴 否</span></td><td><span class="pill pill-r">🔴 紅燈</span></td></tr>
+            <tr><td>臺北市地政局</td><td>行政區統計</td><td><span class="pill pill-y">🟡 Big5</span></td><td><span class="pill pill-y">🟡 無地號</span></td><td><span class="pill pill-y">🟡 部分</span></td><td><span class="pill pill-y">🟡 黃燈</span></td></tr>
+            <tr><td>臺南市地政局</td><td>使用分區統計</td><td><span class="pill pill-y">🟡 格式異常</span></td><td><span class="pill pill-y">🟡 無地號</span></td><td><span class="pill pill-y">🟡 部分</span></td><td><span class="pill pill-y">🟡 黃燈</span></td></tr>
+            <tr><td>金門縣地政局</td><td>逐筆地號明細</td><td><span class="pill pill-y">🟡 Big5</span></td><td><span class="pill pill-r">🔴 純數字代碼</span></td><td><span class="pill pill-g">🟢 可</span></td><td><span class="pill pill-y">🟡 黃燈</span></td></tr>
+            <tr><td>地政司 API</td><td>逐路段查詢</td><td><span class="pill pill-g">🟢 UTF-8</span></td><td><span class="pill pill-y">🟡 全英文欄位</span></td><td><span class="pill pill-r">🔴 逐路段查詢</span></td><td><span class="pill pill-y">🟡 黃燈</span></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p class="mock-note">以上為真實資料（驗證日期 2026-07-02）。完整版含 28 個地政機關與自動每日驗證狀態。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Insight -->
+<section class="insight-section">
+  <div class="wrap">
+    <p class="sec-eye">最關鍵的發現</p>
+    <h2 class="sec-h">標準格式早已存在，問題只是沒有統一入口</h2>
+    <div class="insight-box">
+      <p class="insight-big">183 個中央機關<span>已在使用同一套主計系統標準格式——有 manifest 目錄、有 schema 欄位定義、欄位名稱統一。</span></p>
+      <div class="insight-proof">
+        <div class="ip">
+          <span class="ip-n">183</span>
+          <div class="ip-d">中央機關已採用主計系統標準 ZIP 格式，含 manifest.csv 與統一欄位定義</div>
+        </div>
+        <div class="ip">
+          <span class="ip-n">11,136</span>
+          <div class="ip-d">筆資料集符合此標準格式——散落在 XML 和 ZIP 兩種標示下，使用者難以發現</div>
+        </div>
+        <div class="ip">
+          <span class="ip-n">0</span>
+          <div class="ip-d">採用此標準的縣市政府——中央與地方完全斷層，且主計總處本身反而是死連結</div>
+        </div>
+      </div>
+      <p class="insight-implication">這代表問題不是「技術上做不到」，而是「沒有統一入口、沒有可見度、沒有壓力」。數發部不需要發明新標準——只需要建立一個讓現有標準被看見、缺席者被看見的平台。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Roles -->
+<section class="roles-section">
+  <div class="wrap">
+    <p class="sec-eye">各方角色</p>
+    <h2 class="sec-h">數發部來主導，法務部只需做一件事</h2>
+    <p class="sec-lead">這個提案的設計原則：讓每個機關只需要做它能做的那件事，不需要跨機關協調。</p>
+
+    <div class="role-grid">
+      <div class="role-card primary">
+        <span class="role-badge rb-primary">數位發展部 · 主責</span>
+        <h3>建立「一即是全」合規監測專區</h3>
+        <ul>
+          <li>在 data.gov.tw 建立各主題（預算／地價／法規）的合規地圖，交通燈顯示各機關狀態</li>
+          <li>以程式自動驗證：URL 可用性、格式正確性、更新頻率、欄位完整性</li>
+          <li>Beta 版直接對已公開資料端點跑驗證，不需要任何機關同意</li>
+          <li>先以現有可明確定義的標準做出第一版，讓「函釋待定」欄位空著——用存在本身施壓法務部</li>
+          <li>開放 API 讓議員助理、公民記者、NGO 可以嵌入比較圖</li>
+        </ul>
+        <div class="role-note">核心優勢：資料既然公開發布，就可以被公開評估。數發部無需說服任何機關——地圖上線，機關自會感受到壓力。</div>
+      </div>
+
+      <div class="role-card secondary">
+        <span class="role-badge rb-secondary">法務部 · 一次性任務</span>
+        <h3>訂定函釋與地方法規的資料標準</h3>
+        <ul>
+          <li>定義函釋的資料格式與欄位標準</li>
+          <li>定義地方自治法規的機器可讀規範</li>
+          <li>標準訂完，責任結束——執行由數發部的合規地圖自動追蹤</li>
+        </ul>
+        <div class="role-note" style="background:var(--off)">現有中央法規（法規命令）的標準已可沿用，先讓地圖上線，函釋與地方法規留空，標注「等待法務部訂定標準中」。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Roadmap -->
+<section class="road-section">
+  <div class="wrap">
+    <p class="sec-eye">推進路線</p>
+    <h2 class="sec-h">三個階段，第一階段數發部可以獨立啟動</h2>
+    <div class="roadmap">
+      <div class="step">
+        <div class="step-n">第一階段</div>
+        <div class="step-h">以現有標準建出初版地圖</div>
+        <div class="step-b">用中央法規、法規命令的現有標準，把預算、地價、法規三個主題的合規地圖建出來。函釋和地方法規欄位明顯標注「待訂定」。數發部可獨立啟動，不需要法務部先動。</div>
+        <span class="step-tag tag-now">數發部獨立啟動</span>
+      </div>
+      <div class="step">
+        <div class="step-n">第二階段</div>
+        <div class="step-h">地圖的存在倒逼法務部訂標準</div>
+        <div class="step-b">地圖上線後，「函釋待訂定」的空白欄位是一個持續的公開壓力。地方議員可以用預算和地價的比較地圖去質詢縣長，製造地方施壓動能。</div>
+        <span class="step-tag tag-dep">借助外部壓力</span>
+      </div>
+      <div class="step">
+        <div class="step-n">第三階段</div>
+        <div class="step-h">函釋標準完成，地圖自動擴充</div>
+        <div class="step-b">法務部訂完函釋和地方法規標準後，合規地圖自動加入驗證邏輯，不需要人工介入。整個系統進入自動化運作。</div>
+        <span class="step-tag tag-auto">自動擴充</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="wrap">
+    <h2 class="cta-h">這個提案，我想和您談談</h2>
+    <p class="cta-sub">歡迎直接聯絡，或指定時間安排一次視訊或面談。這份提案也願意進一步細化成可送簽的政策建議書。</p>
+    <div class="contact">
+      <span class="contact-name">王向榮（Ronny Wang）</span>
+      <span class="contact-det">歐噴（OpenFun）</span>
+      <span class="contact-det">ronny@openfun.tw</span>
+    </div>
+  </div>
+</section>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.tc').forEach(el => el.classList.remove('on'));
+  document.querySelectorAll('.mtab').forEach(el => { el.classList.remove('on'); el.classList.add('off'); });
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on'); btn.classList.remove('off');
+}
+</script>
+</body>
+</html>
